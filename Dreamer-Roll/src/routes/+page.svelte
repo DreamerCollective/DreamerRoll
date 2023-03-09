@@ -1,4 +1,13 @@
+<script>
+  import Modifier from "../componets/Modifier.svelte";
+  import Dice from "../componets/Dice.svelte";
 
+  function addDice(numberOfFaces)
+  {
+
+  }
+
+</script>
 <div class="relative isolate overflow-hidden bg-gray-900">
   <div class="px-6 lg:px-8">
     <nav class="flex items-center justify-between pt-6" aria-label="Global">
@@ -17,96 +26,6 @@
         </button>
       </div>
 
-      <div class="hidden lg:flex lg:gap-x-6">
-        <button type="button" class="rounded-md bg-indigo-600 py-2.5 px-3.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
-          <a href="/" class="text-sm font-semibold leading-6 text-white">D2</a>
-        </button>
-
-        <button type="button" class="rounded-md bg-indigo-600 py-2.5 px-3.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
-          <a href="/" class="text-sm font-semibold leading-6 text-white">D4</a>
-        </button>
-
-        <button type="button" class="rounded-md bg-indigo-600 py-2.5 px-3.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
-          <a href="/" class="text-sm font-semibold leading-6 text-white">D6</a>
-        </button>
-
-        <button type="button" class="rounded-md bg-indigo-600 py-2.5 px-3.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
-          <a href="/" class="text-sm font-semibold leading-6 text-white">D8</a>
-        </button>
-
-        <button type="button" class="rounded-md bg-indigo-600 py-2.5 px-3.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
-          <a href="/" class="text-sm font-semibold leading-6 text-white">D10</a>
-        </button>
-
-        <button type="button" class="rounded-md bg-indigo-600 py-2.5 px-3.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
-          <a href="/" class="text-sm font-semibold leading-6 text-white">D12</a>
-        </button>
-
-        <button type="button" class="rounded-md bg-indigo-600 py-2.5 px-3.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
-          <a href="/" class="text-sm font-semibold leading-6 text-white">D14</a>
-        </button>
-
-        <button type="button" class="rounded-md bg-indigo-600 py-2.5 px-3.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
-          <a href="/" class="text-sm font-semibold leading-6 text-white">D16</a>
-        </button>
-
-        <button type="button" class="rounded-md bg-indigo-600 py-2.5 px-3.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
-          <a href="/" class="text-sm font-semibold leading-6 text-white">D18</a>
-        </button>
-
-        <button type="button" class="rounded-md bg-indigo-600 py-2.5 px-3.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
-          <a href="/" class="text-sm font-semibold leading-6 text-white">D20</a>
-        </button>
-
-        <button type="button" class="rounded-md bg-indigo-600 py-2.5 px-3.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
-          <a href="/" class="text-sm font-semibold leading-6 text-white">D22</a>
-        </button>
-
-        <button type="button" class="rounded-md bg-indigo-600 py-2.5 px-3.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
-          <a href="/" class="text-sm font-semibold leading-6 text-white">D24</a>
-        </button>
-
-        <button type="button" class="rounded-md bg-indigo-600 py-2.5 px-3.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
-          <a href="/" class="text-sm font-semibold leading-6 text-white">D26</a>
-        </button>
-
-        <button type="button" class="rounded-md bg-indigo-600 py-2.5 px-3.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
-          <a href="/" class="text-sm font-semibold leading-6 text-white">D28</a>
-        </button>
-
-        <button type="button" class="rounded-md bg-indigo-600 py-2.5 px-3.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
-          <a href="/" class="text-sm font-semibold leading-6 text-white">D30</a>
-        </button>
-
-        <button type="button" class="rounded-md bg-indigo-600 py-2.5 px-3.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
-          <a href="/" class="text-sm font-semibold leading-6 text-white">D32</a>
-        </button>
-
-        <button type="button" class="rounded-md bg-indigo-600 py-2.5 px-3.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
-          <a href="/" class="text-sm font-semibold leading-6 text-white">D34</a>
-        </button>
-
-        <button type="button" class="rounded-md bg-indigo-600 py-2.5 px-3.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
-          <a href="/" class="text-sm font-semibold leading-6 text-white">D36</a>
-        </button>
-
-        <button type="button" class="rounded-md bg-indigo-600 py-2.5 px-3.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
-          <a href="/" class="text-sm font-semibold leading-6 text-white">D38</a>
-        </button>
-
-        <button type="button" class="rounded-md bg-indigo-600 py-2.5 px-3.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
-          <a href="/" class="text-sm font-semibold leading-6 text-white">D40</a>
-        </button>
-
-        <button type="button" class="rounded-md bg-indigo-600 py-2.5 px-3.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
-          <a href="/" class="text-sm font-semibold leading-6 text-white">D100</a>
-        </button>
-      </div>
-      <div class="hidden lg:flex lg:flex-1 lg:justify-end">
-        <button type="button" class="rounded-md bg-indigo-600 py-2.5 px-3.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
-          <a href="/" class="text-sm font-semibold leading-6 text-white">D#</a>
-        </button>
-      </div>
     </nav>
     <!-- Mobile menu, show/hide based on menu open state. -->
     <div role="dialog" aria-modal="true">
@@ -126,7 +45,7 @@
         <div class="mt-6 flow-root">
           <div class="-my-6 divide-y divide-gray-500/25">
             <div class="space-y-2 py-6">
-              <a href="#" class="text-sm font-semibold leading-6 text-white">Roll</a>
+              <span class="text-sm font-semibold leading-6 text-white">Roll</span>
             </div>
           </div>
         </div>
@@ -135,17 +54,35 @@
     <div class="mx-auto max-w-2xl py-32 sm:py-48 lg:py-56">
       <div class="text-center">
         <h1 class="text-6xl font-bold text-white sm:text-1xl">Dreamer Roll</h1>
-        <div class="mx-auto mt-6 sm:flex text-lg text-gray-300">
-          <input type="email" name="NumberOfDice" id="NumberOfDice" class="m-2 block rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" placeholder="number of dice">
-          <div class="m-2 mt-1 text-lg py-1.5 leading-8 text-gray-300">Dice</div>
-          <input type="email" name="DiceFaces" id="DiceFaces" class="m-2 block rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" placeholder="number of side">
-          <div class="m-2 mt-1 text-lg py-1.5 leading-8 text-gray-300">Sided</div>
+        <div class="relative block w-full rounded-lg border-2 border-gray-300 p-1 text-center hover:border-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
+          <div class="flex">
+            <input type="email" name="DiceFaces" id="DiceFaces" class="m-2 block rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" placeholder="Dice Faces">
+            <button type="button" class="flex m-2 rounded-md bg-indigo-600 py-2.5 px-3.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
+              <span class="text-sm font-semibold leading-6 text-white">Add New Dice</span>
+            </button>
+          </div>
+        </div>
+        <Dice/>
+        <div class="relative block w-full rounded-lg border-2 border-gray-300 p-1 text-center hover:border-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
+          <div class="flex">
+            <input type="email" name="modifier" id="modifier" class="m-2 block rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" placeholder="Modifier">
+            <button type="button" class="flex m-2 rounded-md bg-indigo-600 py-2.5 px-3.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
+              <span class="text-sm font-semibold leading-6 text-white">Add New Modifier</span>
+            </button>
+          </div>
+        </div>
+        <Modifier/>
+        <div class="flex">
+          <button type="button" class="flex m-2 rounded-md bg-indigo-600 py-2.5 px-3.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
+            <span class="text-sm font-semibold leading-6 text-white">Roll</span>
+            <svg fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" class=" w-6 h-6 text-white">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 15.75V18m-7.5-6.75h.008v.008H8.25v-.008zm0 2.25h.008v.008H8.25V13.5zm0 2.25h.008v.008H8.25v-.008zm0 2.25h.008v.008H8.25V18zm2.498-6.75h.007v.008h-.007v-.008zm0 2.25h.007v.008h-.007V13.5zm0 2.25h.007v.008h-.007v-.008zm0 2.25h.007v.008h-.007V18zm2.504-6.75h.008v.008h-.008v-.008zm0 2.25h.008v.008h-.008V13.5zm0 2.25h.008v.008h-.008v-.008zm0 2.25h.008v.008h-.008V18zm2.498-6.75h.008v.008h-.008v-.008zm0 2.25h.008v.008h-.008V13.5zM8.25 6h7.5v2.25h-7.5V6zM12 2.25c-1.892 0-3.758.11-5.593.322C5.307 2.7 4.5 3.65 4.5 4.757V19.5a2.25 2.25 0 002.25 2.25h10.5a2.25 2.25 0 002.25-2.25V4.757c0-1.108-.806-2.057-1.907-2.185A48.507 48.507 0 0012 2.25z" />
+            </svg>
+          </button>
         </div>
       </div>
     </div>
-    <div>
 
-    </div>
   </div>
   <div class="absolute inset-x-0 top-[calc(100%-13rem)] -z-10 transform-gpu overflow-hidden blur-3xl sm:top-[calc(100%-30rem)]">
     <svg class="relative left-[calc(50%+3rem)] h-[21.1875rem] max-w-none -translate-x-1/2 sm:left-[calc(50%+36rem)] sm:h-[42.375rem]" viewBox="0 0 1155 678">

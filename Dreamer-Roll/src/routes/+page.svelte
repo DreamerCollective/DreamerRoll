@@ -134,7 +134,8 @@
     </div>
     <div class="mx-auto max-w-2xl py-32 sm:py-48 lg:py-56">
       <div class="text-center">
-        <div class="mx-auto mt-2 sm:flex text-lg text-gray-300">
+        <h1 class="text-6xl font-bold text-white sm:text-1xl">Dreamer Roll</h1>
+        <div class="mx-auto mt-6 sm:flex text-lg text-gray-300">
           <input type="email" name="NumberOfDice" id="NumberOfDice" class="m-2 block rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" placeholder="number of dice">
           <div class="m-2 mt-1 text-lg py-1.5 leading-8 text-gray-300">Dice</div>
           <input type="email" name="DiceFaces" id="DiceFaces" class="m-2 block rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" placeholder="number of side">

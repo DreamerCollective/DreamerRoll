@@ -1,11 +1,13 @@
 <script>
   import Roll from "../componets/Roll.svelte";
+  import NewRoll from "../componets/NewRoll.svelte";
 </script>
 <div class="relative isolate bg-gray-900">
   <div class="px-6 lg:px-8">
     <h1 class=" text-6xl font-bold text-white sm:text-1xl">Dreamer Roll</h1>
     <div class="flex">
       <Roll/>
+      <NewRoll/>
     </div>
   </div>
   <div class="absolute inset-x-0 top-[calc(100%-13rem)] -z-10 transform-gpu overflow-hidden blur-3xl sm:top-[calc(100%-30rem)]">

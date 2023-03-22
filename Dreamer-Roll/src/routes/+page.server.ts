@@ -3,9 +3,10 @@ import { redirect } from "@sveltejs/kit";
 
 export const actions: Actions = {
   default: async ({locals, request}) => {
-    const data = Object.fromEntries(await request.formData()) as {
+    const records = await locals.pb.collection('roll').getFullList({
+      sort: '-created',
+    });
 
-    };
 
     try {
 
@@ -13,6 +14,7 @@ export const actions: Actions = {
       console.error(e);
       throw e;
     }
-    throw redirect(303, '/')
+
+    return records;
   }
 }

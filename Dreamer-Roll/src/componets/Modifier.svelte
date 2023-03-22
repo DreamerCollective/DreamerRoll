@@ -1,4 +1,6 @@
 <script>
+
+  export let record;
   export let name
   export let modifier
 

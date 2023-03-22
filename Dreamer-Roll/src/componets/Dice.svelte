@@ -1,6 +1,8 @@
 <script>
   import random from "random"
 
+  export let record;
+
   export let seed
   export let min
   export let max

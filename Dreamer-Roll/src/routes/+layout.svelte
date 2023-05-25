@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
   import "../app.postcss";
   import {applyAction, enhance} from "$app/forms"
   import {currentUser, pb} from '$lib/pocketbase';
@@ -21,9 +21,9 @@
           </svg>
         </button>
       </div>
-      <div class="hidden lg:flex lg:flex-1 lg:justify-end">
+      <!--<div class="hidden lg:flex lg:flex-1 lg:justify-end">
         {#if $currentUser}
-          <li><a href="/">{$currentUser.email}</a></li>
+          <li><a href="/"> Signed in as {$currentUser.email}</a></li>
           <li>
             <form
             method="POST"
@@ -43,7 +43,7 @@
             <a href="/Login" class="text-sm mx-1 font-semibold leading-6 text-white">Log in <span aria-hidden="true">&rarr;</span></a>
           </div>
         {/if}
-      </div>
+      </div>-->
     </nav>
   </header>
   <slot/>

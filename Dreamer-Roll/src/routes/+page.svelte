@@ -1,13 +1,13 @@
-<script>
+<script lang="ts">
   import Roll from "../componets/Roll.svelte";
   import NewRoll from "../componets/NewRoll.svelte";
-  export let record;
+  export let records;
 </script>
 <div class="relative isolate bg-gray-900">
   <div class="px-6 lg:px-8">
     <h1 class=" text-6xl font-bold text-white sm:text-1xl">Dreamer Roll</h1>
     <div class="flex">
-      {#each record.data as record}
+      {#each records as record (record.id)}
         <Roll record = {record}/>
       {/each}
       <NewRoll/>

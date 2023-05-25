@@ -1,20 +1,14 @@
-import type {Actions} from "./$types";
-import { redirect } from "@sveltejs/kit";
+import type { Actions } from "./$types";
 
 export const actions: Actions = {
   default: async ({locals, request}) => {
-    const records = await locals.pb.collection('roll').getFullList({
-      sort: '-created',
-    });
-
-
-    try {
-
-    }catch (e) {
-      console.error(e);
-      throw e;
+    try{
+      let records = await locals.pb.collection('roll').getFullList({
+        sort: 'created',
+      });
+      return records.items;
+    } catch (err) {
+      console.log('Error: ', err)
     }
-
-    return records;
   }
 }

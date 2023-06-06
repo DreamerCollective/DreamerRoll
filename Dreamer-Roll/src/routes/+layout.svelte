@@ -1,7 +1,6 @@
-<script lang="ts">
+<script>
   import "../app.postcss";
   import {applyAction, enhance} from "$app/forms"
-  import {currentUser, pb} from '$lib/pocketbase';
 
 </script>
 <div>
@@ -26,24 +25,28 @@
           <li><a href="/"> Signed in as {$currentUser.email}</a></li>
           <li>
             <form
-            method="POST"
+            method="GET"
             action="/logout"
             use:enhance={()=>{
               return async ({result}) => {
               pb.authStore.clear()
               await applyAction(result)}
             }}>
-
             </form>
           </li>
 
-        {:else }
-          <div class="flex">
-            <a href="/Signup" class="text-sm mx-1 font-semibold leading-6 text-white">Register</a>
-            <a href="/Login" class="text-sm mx-1 font-semibold leading-6 text-white">Log in <span aria-hidden="true">&rarr;</span></a>
-          </div>
-        {/if}
-      </div>-->
+      {:else }
+        <div class="flex">
+          <a href="/Signup" class="text-sm mx-1 font-semibold leading-6 text-white">Register</a>
+          <a href="/Login" class="text-sm mx-1 font-semibold leading-6 text-white">Log in <span aria-hidden="true">&rarr;</span></a>
+        </div>
+      {/if}-->
+
+        <div class="flex">
+          <a href="/Signup" class="text-sm mx-1 font-semibold leading-6 text-white">Register</a>
+          <a href="/Login" class="text-sm mx-1 font-semibold leading-6 text-white">Log in <span aria-hidden="true">&rarr;</span></a>
+        </div>
+
     </nav>
   </header>
   <slot/>

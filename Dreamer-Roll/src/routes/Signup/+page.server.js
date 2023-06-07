@@ -1,5 +1,4 @@
 import {pb} from "$lib/pocketbase.js";
-import { redirect } from "@sveltejs/kit";
 
 
 export const actions ={

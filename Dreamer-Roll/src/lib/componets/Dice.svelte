@@ -1,6 +1,7 @@
 <script>
   import random from "random"
   import { pb } from "$lib/pocketbase.js";
+  import { StoreDice } from "$lib/Store.js";
 
   export let record;
 
@@ -17,12 +18,11 @@
   async function getDiceRecord(){
     const dicerecord = await pb.collection('die').getOne(record)
     console.log(dicerecord)
+    $StoreDice.push(dicerecord)
+    console.log("StoreDice = ",$StoreDice)
     return dicerecord
   }
-
   let getdiceRecord = getDiceRecord()
-
-
 </script>
 {#await getdiceRecord then dicerecord}
 <div class="relative block w-90% rounded-lg border-2 border-gray-300 p-1 text-center hover:border-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">

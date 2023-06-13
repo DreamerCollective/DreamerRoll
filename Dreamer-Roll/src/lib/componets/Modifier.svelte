@@ -1,6 +1,7 @@
 <script>
   import { pb } from "$lib/pocketbase.js";
   import { onMount } from "svelte";
+  import { StoreDice, StoreModifier } from "$lib/Store.js";
 
   export let record;
 
@@ -9,6 +10,8 @@
   async function getModifierRecord(){
     const modifierrecord = await pb.collection('modifier').getOne(record)
     console.log(modifierrecord)
+    $StoreModifier.push(modifierrecord)
+    console.log("StoreModifier = ",$StoreModifier)
     return modifierrecord
   }
 

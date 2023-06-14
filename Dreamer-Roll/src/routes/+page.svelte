@@ -8,7 +8,6 @@
   <div class="px-6 lg:px-8">
     <h1 class=" text-6xl font-bold text-white sm:text-1xl">Dreamer Roll</h1>
     <div class="flex">
-      {@debug data}
       {#each data?.records as record}
         <Roll record = {record}/>
       {/each}

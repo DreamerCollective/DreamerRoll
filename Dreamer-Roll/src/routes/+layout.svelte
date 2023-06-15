@@ -1,6 +1,7 @@
 <script>
   import "../app.postcss";
   import {applyAction, enhance} from "$app/forms"
+  import { currentUser,pb } from "$lib/pocketbase.js";
 
 </script>
 <div>
@@ -20,8 +21,9 @@
           </svg>
         </button>
       </div>
-      <!--<div class="hidden lg:flex lg:flex-1 lg:justify-end">
+      <div class="hidden lg:flex lg:flex-1 lg:justify-end">
         {#if $currentUser}
+          <a class="text-sm mx-1 font-semibold leading-6 text-white">Logout</a>
           <li><a href="/"> Signed in as {$currentUser.email}</a></li>
           <li>
             <form
@@ -34,19 +36,13 @@
             }}>
             </form>
           </li>
-
       {:else }
         <div class="flex">
           <a href="/Signup" class="text-sm mx-1 font-semibold leading-6 text-white">Register</a>
           <a href="/Login" class="text-sm mx-1 font-semibold leading-6 text-white">Log in <span aria-hidden="true">&rarr;</span></a>
         </div>
-      {/if}-->
-
-        <div class="flex">
-          <a href="/Signup" class="text-sm mx-1 font-semibold leading-6 text-white">Register</a>
-          <a href="/Login" class="text-sm mx-1 font-semibold leading-6 text-white">Log in <span aria-hidden="true">&rarr;</span></a>
-        </div>
-
+      {/if}
+      </div>
     </nav>
   </header>
   <slot/>

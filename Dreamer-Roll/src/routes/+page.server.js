@@ -6,10 +6,8 @@ export async function load() {
     try{
       const records = await getAllRollRecord()
 
-      const results = records.map((record)=> {return {id:record.id, result:record.result, rolldies:record.expand.rolldies.map((record) => {return {id:record.id, diefaces:record.diefaces, dienames:record.dienames, rawresult:record.rawresult}}),
-        rollmodifiers:record.expand.rollmodifiers.map((record)=>{return {id:record.id, modifiername:record.modifiername, modifiernumber:record.modifiernumber}})}})
       return {
-        records: results
+        records: records
       }
 
     }catch (e) {

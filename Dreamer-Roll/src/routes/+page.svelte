@@ -4,6 +4,7 @@
   export let data;
 
 </script>
+{@debug data}
 <div class="relative isolate bg-gray-900">
   <div class="px-6 lg:px-8">
     <h1 class=" text-6xl font-bold text-white sm:text-1xl">Dreamer Roll</h1>
@@ -11,7 +12,7 @@
       {#each data?.records as record}
         <Roll record = {record}/>
       {/each}
-      <NewRoll/>
+      <NewRoll />
     </div>
   </div>
   <div class="absolute inset-x-0 top-[calc(100%-13rem)] -z-10 transform-gpu overflow-hidden blur-3xl sm:top-[calc(100%-30rem)]">

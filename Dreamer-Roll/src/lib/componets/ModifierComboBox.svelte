@@ -1,6 +1,5 @@
 <script>
-  import { onMount } from "svelte";
-  import { getAllModifierRecord } from "$lib/Store.js";
+
 
   let ModifierComboBoxButton = false
   function expandModifierComboBox()
@@ -9,9 +8,7 @@
   }
 
   let allModifierRecords
-  onMount(async () => {
-    allModifierRecords = await getAllModifierRecord()
-  })
+
 </script>
 {@debug allModifierRecords}
 <div class="relative block w-90% rounded-lg border-2 border-gray-300 p-1 text-center hover:border-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">

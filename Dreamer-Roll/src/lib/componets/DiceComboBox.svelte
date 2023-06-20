@@ -1,6 +1,5 @@
 <script>
-  import { onMount } from "svelte";
-  import { getAllDiceRecord} from "$lib/Store.js";
+
 
   let DiceComboBoxButtion = false
   function expandDiceComboBox()
@@ -9,9 +8,6 @@
   }
 
   let allDiceRecords
-  onMount(async () => {
-    allDiceRecords = await getAllDiceRecord()
-  })
 
 </script>
 {@debug allDiceRecords}

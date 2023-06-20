@@ -9,7 +9,11 @@ export async function load() {
       const AllModifierRecords = await getAllModifierRecord()
       const AllDiceRecords = await getAllDiceRecord()
       return {
-        records: AllRollRecords
+        records: {
+          AllRollRecords: AllRollRecords,
+          AllModifierRecords: AllModifierRecords,
+          AllDiceRecords: AllDiceRecords
+        }
       }
     }catch (e) {
       console.log("Error: ", e);

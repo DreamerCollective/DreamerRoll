@@ -7,11 +7,3 @@ export const get = async () => ({
 })
 
 let seed
-let min
-let max
-
-function rollDice(min, max)
-{
-  random.use(seed)
-  return random.int(min, max)
-}

@@ -23,19 +23,8 @@
       </div>
       <div class="hidden lg:flex lg:flex-1 lg:justify-end">
         {#if $currentUser}
-          <a class="text-sm mx-1 font-semibold leading-6 text-white">Logout</a>
+          <a href="/" class="text-sm mx-1 font-semibold leading-6 text-white">Logout</a>
           <li><a href="/"> Signed in as {$currentUser.email}</a></li>
-          <li>
-            <form
-            method="GET"
-            action="/logout"
-            use:enhance={()=>{
-              return async ({result}) => {
-              pb.authStore.clear()
-              await applyAction(result)}
-            }}>
-            </form>
-          </li>
       {:else }
         <div class="flex">
           <a href="/Signup" class="text-sm mx-1 font-semibold leading-6 text-white">Register</a>

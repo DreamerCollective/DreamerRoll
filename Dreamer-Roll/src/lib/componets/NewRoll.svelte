@@ -7,7 +7,8 @@
   import AddNewModifier from "$lib/componets/AddNewModifier.svelte";
   import AddNewDice from "$lib/componets/AddNewDice.svelte";
 
-  export let record
+  export let diceRecord
+  export let modifierRecord
 </script>
 
 <div class="mt-6 my-1 mx-0.5 divide-y divide-gray-500/25space-y-2 py-2 sm:py-12 lg:py-16">
@@ -19,7 +20,7 @@
         {@debug recordDice}
         <Dice record="{recordDice}"/>
       {/each}-->
-      <DiceComboBox />
+      <DiceComboBox allDiceRecords="{diceRecord}" />
       <AddNewDice />
     </div>
     <div class="relative block w-90% rounded-lg border-2 border-gray-300 p-1 text-center hover:border-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
@@ -28,7 +29,7 @@
         {@debug recordModifier}
         <Modifier record="{recordModifier}"/>
       {/each}-->
-      <ModifierComboBox />
+      <ModifierComboBox allModifierRecords="{modifierRecord}" />
       <AddNewModifier />
     </div>
     <div class="flex">

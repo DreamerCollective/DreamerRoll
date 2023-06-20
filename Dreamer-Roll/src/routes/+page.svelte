@@ -10,9 +10,9 @@
     <h1 class=" text-6xl font-bold text-white sm:text-1xl">Dreamer Roll</h1>
     <div class="flex">
       {#each data?.records.AllRollRecords as record}
-        <Roll record = {record}/>
+        <Roll record = {record} diceRecord = {data.records.AllDiceRecords} modifierRecord = {data.records.AllModifierRecords}/>
       {/each}
-      <NewRoll />
+      <NewRoll diceRecord = {data?.records.AllDiceRecords} modifierRecord = {data.records?.AllModifierRecords}/>
     </div>
   </div>
   <div class="absolute inset-x-0 top-[calc(100%-13rem)] -z-10 transform-gpu overflow-hidden blur-3xl sm:top-[calc(100%-30rem)]">

@@ -24,7 +24,7 @@ export async function getAllRollRecord(){
     sort: 'created',
     expand: 'rolldies, rollmodifiers'
   });
-  const results = RollRecord.map((record)=> {return {id:record.id, result:record.result, rolldies:record.expand.rolldies.map((record) => {return {id:record.id, diefaces:record.diefaces, dienames:record.dienames, rawresult:record.rawresult}}),
+  const results = RollRecord.map((record)=> {return {id:record.id, rollname:record.rollname, result:record.result, rolldies:record.expand.rolldies.map((record) => {return {id:record.id, diefaces:record.diefaces, dienames:record.dienames, rawresult:record.rawresult}}),
     rollmodifiers:record.expand.rollmodifiers.map((record)=>{return {id:record.id, modifiername:record.modifiername, modifiernumber:record.modifiernumber}})}})
   console.log('GetAllRollRecord = ' + RollRecord)
   return results
@@ -34,7 +34,7 @@ export async function getAllDiceRecord(){
   const DiceRecord = await pb.collection('die').getFullList({
     sort: 'created',
   });
-  const results = DiceRecord.map((record)=> {return {id:record.id, diefaces:record.diefaces, dienames:record.dienames, rawresult:record.rawresult}})
+  const results = DiceRecord.map((record)=> {return {id:record.id, diefaces:record.diefaces, dienames:record.dienames}})
   console.log('GetAllDiceRecord = ' + DiceRecord)
   return results
 }

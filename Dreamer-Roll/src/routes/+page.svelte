@@ -12,7 +12,7 @@
       {#each data?.records.AllRollRecords as record}
         <Roll record = {record} diceRecord = {data.records.AllDiceRecords} modifierRecord = {data.records.AllModifierRecords}/>
       {/each}
-      <NewRoll diceRecord = {data?.records.AllDiceRecords} modifierRecord = {data.records?.AllModifierRecords}/>
+      <NewRoll diceRecord = {data?.records.AllDiceRecords} modifierRecord = {data?.records.AllModifierRecords}/>
     </div>
   </div>
   <div class="absolute inset-x-0 top-[calc(100%-13rem)] -z-10 transform-gpu overflow-hidden blur-3xl sm:top-[calc(100%-30rem)]">

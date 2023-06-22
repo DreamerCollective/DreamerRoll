@@ -9,12 +9,14 @@
 
   export let allDiceRecords
 
+  export let recordId
+
 </script>
 {@debug allDiceRecords}
 <div class="relative block w-90% rounded-lg border-2 border-gray-300 p-1 text-center hover:border-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
 <span class="text-sm font-semibold text-white">Add New Dice</span>
 {#if DiceComboBoxButtion}
-  <label for="combobox" class="block text-sm font-medium leading-none text-gray-900">Add Dice</label>
+  <label for="combobox" class="w-full block text-sm font-medium leading-none text-gray-900">Add Dice</label>
   <div class="relative mt-2">
     <input id="combobox" type="text" class="w-full rounded-md border-0 bg-white py-1.5 pl-3 pr-12 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" role="combobox" aria-controls="options" aria-expanded="false">
     <button type="button" on:click={expandDiceComboBox} class="absolute inset-y-0 right-0 items-center rounded-r-md px-2 focus:outline-none">
@@ -25,7 +27,7 @@
   </div>
   {#each allDiceRecords as allDiceRecord}
     {@debug allDiceRecord}
-    <DiceComboxOption allDiceRecord = "{allDiceRecord}" />
+    <DiceComboxOption allDiceRecord="{allDiceRecord}" RollRecordId="{recordId}" />
   {/each}
 {/if}
 {#if !DiceComboBoxButtion}

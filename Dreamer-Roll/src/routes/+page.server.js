@@ -71,8 +71,9 @@ export async function getOneRollRecordForUpdate(id){
   const RollRecordClean= {
     id: RollRecord.id,
     result: RollRecord.result,
-    rolldies: RollRecord.expand.rolldies.map((record) => {return {id:record.id}}),
-    rollmodifier: RollRecord.expand.rollmodifiers.map((record)=>{return {id:record.id}})
+    rollname: RollRecord.rollname,
+    rolldies: RollRecord.expand.rolldies.map((record) => {return record.id}),
+    rollmodifiers: RollRecord.expand.rollmodifiers.map((record)=>{return record.id})
   }
   return RollRecordClean
 }
@@ -83,7 +84,7 @@ export async function getOneDiceRecord(id){
   console.log('GetOneDiceRecord = ' + DiceRecord)
   const DiceRecordClean = {
     id: DiceRecord.id,
-    diename: DiceRecord.diename,
+    diename: DiceRecord.dienames,
     diefaces: DiceRecord.diefaces
   }
   console.log('Returning record = ' + DiceRecordClean)
@@ -116,21 +117,21 @@ export const actions = {
       diefaces,
     }
 
-    const updateDiceRecord = await pb.collection('die').create(CreateRecord)
+    await pb.collection('die').create(CreateRecord)
   },
 
   CreateModifierRecord: async ({ request }) => {
     const form = await request.formData()
 
-    const modifiersname = form.get('ModifierNames') ?? '';
-    const modifiersnumber = form.get('ModifierNumber') ?? '';
+    const modifiername = form.get('modifiername') ?? '';
+    const modifiernumber = form.get('modifiernumber') ?? '';
 
     const CreateRecord = {
-      modifiersname,
-      modifiersnumber
+      modifiername,
+      modifiernumber
     }
 
-    const updateModifierRecord = await pb.collection('modifier').create(CreateRecord)
+    await pb.collection('modifier').create(CreateRecord)
   },
 
   CreateRollRecord: async ({ request }) => {
@@ -149,11 +150,6 @@ export const actions = {
     const dienames = form.get('diename') ?? '';
     const diefaces = form.get('diefaces') ?? '';
     const id = form.get('dieid') ?? '';
-
-    const UpdatedRecord = {
-      dienames,
-      diefaces,
-    }
 
     const updateDiceRecord = await pb.collection('die').update(id, UpdatedRecord)
     console.log(updateDiceRecord)
@@ -183,33 +179,58 @@ export const actions = {
 
     let RollRecordToUpdate = await getOneRollRecordForUpdate(RollId)
 
-    RollRecordToUpdate.rolldies.push(dieid)
+    const RollRecordToUpdateObject = {
+      results: RollRecordToUpdate.result,
+      rolldies: RollRecordToUpdate.rolldies,
+      rollmodifiers: RollRecordToUpdate.rollmodifiers,
+      rollname: RollRecordToUpdate.rollname
+    }
 
-    const updateRollRecord = await pb.collection('roll').update(RollId, RollRecordToUpdate)
-    console.log(updateRollRecord)
+    RollRecordToUpdateObject.rolldies.push(dieid)
+
+    const updateRollRecord = await pb.collection('roll').update(RollId, RollRecordToUpdateObject)
+    console.log(RollRecordToUpdateObject)
   },
 
   UpdateRollRecordWithNewModifier: async ({ request }) => {
     const form = await request.formData()
 
-    const modifiersid = form.get('modifierid') ?? '';
+    const modifierid = form.get('modifierid') ?? '';
     const RollId = form.get('rollrecordid') ?? '';
 
     let RollRecordToUpdate = await getOneRollRecordForUpdate(RollId)
 
-    RollRecordToUpdate.rollmodifier.push(modifiersid)
+    const RollRecordToUpdateObject = {
+      results: RollRecordToUpdate.result,
+      rolldies: RollRecordToUpdate.rolldies,
+      rollmodifiers: RollRecordToUpdate.rollmodifiers,
+      rollname: RollRecordToUpdate.rollname
+    }
 
-    const updateRollRecord = await pb.collection('roll').update(RollId, RollRecordToUpdate)
-    console.log(updateRollRecord)
+    RollRecordToUpdateObject.rollmodifiers.push(modifierid)
+
+    const updateRollRecord = await pb.collection('roll').update(RollId, RollRecordToUpdateObject)
+    console.log(RollRecordToUpdateObject)
   },
 
   UpdateRollRecordWithNewName: async ({ request }) => {
     const form = await request.formData()
 
-    const DiceNames = form.get('rollname') ?? '';
-    const id = form.get('rollid') ?? '';
+    const rollname = form.get('rollname') ?? '';
+    const RollId = form.get('rollid') ?? '';
 
-    const updateRollRecord = await pb.collection('roll').update('1', UpdatedRecord)
+    let RollRecordToUpdate = await getOneRollRecordForUpdate(RollId)
+
+    const RollRecordToUpdateObject = {
+      results: RollRecordToUpdate.result,
+      rolldies: RollRecordToUpdate.rolldies,
+      rollmodifiers: RollRecordToUpdate.rollmodifiers,
+      rollname: RollRecordToUpdate.rollname
+    }
+
+    RollRecordToUpdateObject.rollname = rollname;
+
+    const updateRollRecord = await pb.collection('roll').update(RollId, RollRecordToUpdateObject)
     console.log(updateRollRecord)
   },
 

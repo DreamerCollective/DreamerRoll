@@ -10,7 +10,7 @@
   export let diceRecord
   export let modifierRecord
 
-  function rollRoll(roll)
+  function rollRoll()
   {
     let rollresult = 0;
     for (let i = 0; i < record.rolldies.length - 1; i++)
@@ -21,14 +21,14 @@
     {
       rollresult += record.rollmodifiers[i].modifiernumber
     }
+    return rollresult;
   }
 
 </script>
-{@debug record}
 <div class="mt-6 my-1 mx-0.5 divide-y divide-gray-500/25space-y-2 py-2 sm:py-12 lg:py-16">
   <div class="relative block rounded-lg border-2 border-gray-300 p-1 text-center hover:border-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
     <div class="flex">
-      <form method="POST" action="?/UpdateRollRecord">
+      <form method="POST" action="?/UpdateRollRecordWithNewName">
         <div class="flex">
           <div>
             <input type="hidden" required name="rollid" id="rollid" value="{record.id}">
@@ -46,7 +46,6 @@
     <div class="relative block w-90% rounded-lg border-2 border-gray-300 p-1 text-center hover:border-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
       <div class="text-sm font-semibold leading-6 text-white">Dice</div>
       {#each record.rolldies as recordDice }
-        {@debug recordDice}
         <Dice record="{recordDice}"/>
       {/each}
       <DiceComboBox allDiceRecords="{diceRecord}" recordId="{record.id}" />
@@ -55,7 +54,6 @@
     <div class="relative block w-90% rounded-lg border-2 border-gray-300 p-1 text-center hover:border-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
       <div class="text-sm font-semibold leading-6 text-white">Modifiers</div>
       {#each record.rollmodifiers as recordModifier }
-        {@debug recordModifier}
         <Modifier record="{recordModifier}"/>
       {/each}
       <ModifierComboBox allModifierRecords="{modifierRecord}" recordId="{record.id}" />

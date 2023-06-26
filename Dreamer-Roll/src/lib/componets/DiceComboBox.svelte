@@ -12,7 +12,6 @@
   export let recordId
 
 </script>
-{@debug allDiceRecords}
 <div class="relative block w-90% rounded-lg border-2 border-gray-300 p-1 text-center hover:border-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
 <span class="text-sm font-semibold text-white">Add New Dice</span>
 {#if DiceComboBoxButtion}
@@ -26,7 +25,6 @@
     </button>
   </div>
   {#each allDiceRecords as allDiceRecord}
-    {@debug allDiceRecord}
     <DiceComboxOption allDiceRecord="{allDiceRecord}" RollRecordId="{recordId}" />
   {/each}
 {/if}

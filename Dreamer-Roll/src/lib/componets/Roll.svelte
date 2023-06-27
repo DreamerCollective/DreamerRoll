@@ -33,16 +33,16 @@
     </div>
     <div class="relative block w-90% rounded-lg border-2 border-gray-300 p-1 text-center hover:border-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
       <div class="text-sm font-semibold leading-6 text-white">Dice</div>
-      {#each record.rolldies as recordDice }
-        <Dice record="{recordDice}"/>
+      {#each record.rolldies as recordDice, i}
+        <Dice record="{recordDice}" rollrecordid="{record.id}" recordid="{i}"/>
       {/each}
-      <DiceComboBox allDiceRecords="{diceRecord}" recordId="{record.id}" />
+      <DiceComboBox allDiceRecords="{diceRecord}" recordId="{record.id}"/>
 
       </div>
     <div class="relative block w-90% rounded-lg border-2 border-gray-300 p-1 text-center hover:border-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
       <div class="text-sm font-semibold leading-6 text-white">Modifiers</div>
-      {#each record.rollmodifiers as recordModifier }
-        <Modifier record="{recordModifier}"/>
+      {#each record.rollmodifiers as recordModifier, i}
+        <Modifier record="{recordModifier}" rollrecordid="{record.id}" recordid="{i}"/>
       {/each}
       <ModifierComboBox allModifierRecords="{modifierRecord}" recordId="{record.id}" />
 

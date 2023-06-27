@@ -1,6 +1,4 @@
 import { pb } from "$lib/pocketbase.js";
-import PocketBase from "pocketbase";
-import { AllDiceRecords } from "$lib/Store.js";
 import random from "random";
 
 export async function load() {
@@ -48,7 +46,7 @@ export async function getAllModifierRecord(){
   return results
 }
 
-export async function getWholeOneRollRecord(id){
+export async function getWholeOneRollRecordForUpdate(id){
   console.log('getOneRollRecordRawId =' + id)
   const RollRecord = await pb.collection('roll').getOne(id, {
     sort: 'created',
@@ -195,11 +193,10 @@ export const actions = {
   UpdateRollRecordWithNewDice: async ({ request }) => {
     const form = await request.formData()
 
-    const dieid = form.get('diceid') ?? '';
+    const dieid = form.get('dieid') ?? '';
     const RollId = form.get('rollrecordid') ?? '';
 
-    let RollRecordToUpdate = await getWholeOneRollRecord(RollId)
-
+    let RollRecordToUpdate = await getOneRollRecordForUpdate(RollId)
 
     const RollRecordToUpdateObject = {
       results: RollRecordToUpdate.result,
@@ -209,6 +206,30 @@ export const actions = {
     }
 
     RollRecordToUpdateObject.rolldies.push(dieid)
+
+    const updateRollRecord = await pb.collection('roll').update(RollId, RollRecordToUpdateObject)
+    console.log(RollRecordToUpdateObject)
+  },
+
+  UpdateRollRecordToRemoveDice: async ({ request }) => {
+    const form = await request.formData()
+
+    const dieid = form.get('dieid') ?? '';
+    const RollId = form.get('rollid') ?? '';
+
+    let RollRecordToUpdate = await getOneRollRecordForUpdate(RollId)
+
+    console.log("index trying to remove from " + dieid)
+
+    const RollRecordToUpdateObject = {
+      results: RollRecordToUpdate.result,
+      rolldies: RollRecordToUpdate.rolldies,
+      rollmodifiers: RollRecordToUpdate.rollmodifiers,
+      rollname: RollRecordToUpdate.rollname
+    }
+
+    RollRecordToUpdateObject.rolldies.splice(dieid,1)
+
 
     const updateRollRecord = await pb.collection('roll').update(RollId, RollRecordToUpdateObject)
     console.log(RollRecordToUpdateObject)
@@ -230,6 +251,29 @@ export const actions = {
     }
 
     RollRecordToUpdateObject.rollmodifiers.push(modifierid)
+
+    const updateRollRecord = await pb.collection('roll').update(RollId, RollRecordToUpdateObject)
+    console.log(RollRecordToUpdateObject)
+  },
+
+  UpdateRollRecordToRemoveModifier: async ({ request }) => {
+    const form = await request.formData()
+
+    const modifierid = form.get('modifierid') ?? '';
+    const RollId = form.get('rollid') ?? '';
+
+    let RollRecordToUpdate = await getOneRollRecordForUpdate(RollId)
+
+    console.log("index trying to remove from " + modifierid)
+
+    RollRecordToUpdate.rollmodifiers.splice(modifierid,1)
+
+    const RollRecordToUpdateObject = {
+      results: RollRecordToUpdate.result,
+      rolldies: RollRecordToUpdate.rolldies,
+      rollmodifiers: RollRecordToUpdate.rollmodifiers,
+      rollname: RollRecordToUpdate.rollname
+    }
 
     const updateRollRecord = await pb.collection('roll').update(RollId, RollRecordToUpdateObject)
     console.log(RollRecordToUpdateObject)
@@ -259,7 +303,7 @@ export const actions = {
 
     const RollId = form.get('rollid') ?? '';
 
-    let RollRecordToUpdate = await getWholeOneRollRecord(RollId)
+    let RollRecordToUpdate = await getWholeOneRollRecordForUpdate(RollId)
 
     let RollResult = rollRoll(RollRecordToUpdate)
 

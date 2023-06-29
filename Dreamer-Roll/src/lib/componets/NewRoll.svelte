@@ -1,9 +1,9 @@
 <script>
-  import { NewRoll } from "$lib/Store.js"
+  import { ModifiersForNewRoll, DiceForNewRoll } from "$lib/Store.js"
   import Modifier from "./Modifier.svelte";
   import Dice from "./Dice.svelte";
-  import DiceComboBox from "$lib/componets/DiceComboBox.svelte";
-  import ModifierComboBox from "$lib/componets/ModifierComboBox.svelte";
+  import DiceComboBoxForNewRoll from "$lib/componets/DiceComboBoxForNewRoll.svelte";
+  import ModifierComboBoxForNewRoll from "$lib/componets/ModifierComboBoxForNewRoll.svelte";
   import AddNewModifier from "$lib/componets/AddNewModifier.svelte";
   import AddNewDice from "$lib/componets/AddNewDice.svelte";
 
@@ -17,20 +17,20 @@
     <input type="text" name="RollName" id="RollName" class="w-full my-2 block rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" placeholder="New Roll Name">
     <div class="relative block w-90% rounded-lg border-2 border-gray-300 p-1 text-center hover:border-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
       <div class="text-sm font-semibold leading-6 text-white">Dice</div>
-      <!--{#each $NewRoll.rolldies as recordDice }
+      {#each $DiceForNewRoll as recordDice }
         {@debug recordDice}
         <Dice record="{recordDice}"/>
-      {/each}-->
-      <DiceComboBox allDiceRecords="{diceRecord}" />
+      {/each}
+      <DiceComboBoxForNewRoll allDiceRecords="{diceRecord}" />
       <AddNewDice />
     </div>
     <div class="relative block w-90% rounded-lg border-2 border-gray-300 p-1 text-center hover:border-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
       <div class="text-sm font-semibold leading-6 text-white">Modifiers</div>
-      <!--{#each $NewRoll.rollmodifiers as recordModifier }
+      {#each $ModifiersForNewRoll as recordModifier }
         {@debug recordModifier}
         <Modifier record="{recordModifier}"/>
-      {/each}-->
-      <ModifierComboBox allModifierRecords="{modifierRecord}" />
+      {/each}
+      <ModifierComboBoxForNewRoll allModifierRecords="{modifierRecord}" />
       <AddNewModifier />
     </div>
     <div class="flex">

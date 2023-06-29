@@ -1,17 +1,21 @@
 <script lang>
   import Roll from "$lib/componets/Roll.svelte";
   import NewRoll from "$lib/componets/NewRoll.svelte";
+  import { onMount } from "svelte";
+  import { RollRecord } from "$lib/Store.js";
   export let data;
+
+
 
 </script>
 <div class="relative isolate bg-gray-900">
   <div class="px-6 lg:px-8">
     <h1 class=" text-6xl font-bold text-white sm:text-1xl">Dreamer Roll</h1>
     <div class="flex">
-      {#each data?.records.AllRollRecords as record}
-        <Roll record = {record} diceRecord = {data.records.AllDiceRecords} modifierRecord = {data.records.AllModifierRecords}/>
+      {#each data.records.AllRollRecords as record, i}
+        <Roll iterator = {i} record = {record} diceRecord = {data.records.AllDiceRecords} modifierRecord = {data.records.AllModifierRecords}/>
       {/each}
-      <NewRoll diceRecord = {data?.records.AllDiceRecords} modifierRecord = {data?.records.AllModifierRecords}/>
+      <NewRoll diceRecord = {data.records.AllDiceRecords} modifierRecord = {data.records.AllModifierRecords}/>
     </div>
   </div>
   <div class="absolute inset-x-0 top-[calc(100%-13rem)] -z-10 transform-gpu overflow-hidden blur-3xl sm:top-[calc(100%-30rem)]">

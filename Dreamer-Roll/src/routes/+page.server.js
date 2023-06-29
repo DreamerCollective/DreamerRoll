@@ -17,15 +17,54 @@ export async function load() {
       console.log("Error: ", e);
     }
 }
-export async function getAllRollRecord(){
+export async function getAllRollRecord() {
   const RollRecord = await pb.collection('roll').getFullList({
     sort: 'created',
     expand: 'rolldies, rollmodifiers'
   });
-  const results = RollRecord.map((record)=> {return {id:record.id, rollname:record.rollname, result:record.result, rolldies:record.expand.rolldies.map((record) => {return {id:record.id, diefaces:record.diefaces, dienames:record.dienames}}),
-    rollmodifiers:record.expand.rollmodifiers.map((record)=>{return {id:record.id, modifiername:record.modifiername, modifiernumber:record.modifiernumber}})}})
+  const results = RollRecord.map((record) => {
+      return {
+        id: record.id, rollname: record.rollname, result: record.result,
+        rolldies: record.expand.rolldies.map((record) => {
+          return { id: record.id, diefaces: record.diefaces, dienames: record.dienames }
+        }),
+        rollmodifiers: record.expand.rollmodifiers.map((record) => {
+          return { id: record.id, modifiername: record.modifiername, modifiernumber: record.modifiernumber }
+        })
+      }
+    }
+  )
   console.log('GetAllRollRecord = ' + RollRecord)
-  return results
+  let RollRecordResult = []
+  for (let i = 0; i < results.length; i++)
+  {
+    if (RollRecord[i].rolldies.length === 0)
+    {
+      RollRecordResult[i].id = results[i].id
+      RollRecordResult[i].results = results[i].result
+      RollRecordResult[i].rolldies = []
+      RollRecordResult[i].rollmodifiers = results[i].rollmodifiers
+      RollRecordResult[i].rollname = results[i].rollname
+
+    }
+    if (RollRecord[i].modifier.length === 0)
+    {
+      RollRecordResult[i].id = results[i].id
+      RollRecordResult[i].results = results[i].result
+      RollRecordResult[i].rolldies = results[i].rolldies
+      RollRecordResult[i].rollmodifiers = []
+      RollRecordResult[i].rollname = results[i].rollname
+    }
+    else
+    {
+      RollRecordResult[i].id = results[i].id
+      RollRecordResult[i].results = results[i].result
+      RollRecordResult[i].rolldies = results[i].rolldies
+      RollRecordResult[i].rollmodifiers = results[i].rollmodifiers
+      RollRecordResult[i].rollname = results[i].rollname
+    }
+  }
+  return RollRecordResult
 }
 
 export async function getAllDiceRecord(){
@@ -52,13 +91,16 @@ export async function getWholeOneRollRecordForUpdate(id){
     sort: 'created',
     expand: 'rolldies, rollmodifiers'
   });
-  const RollRecordClean= {
+  return {
     id: RollRecord.id,
     result: RollRecord.result,
-    rolldies: RollRecord.expand.rolldies.map((record) => {return {id:record.id, diefaces:record.diefaces, dienames:record.dienames}}),
-    rollmodifiers: RollRecord.expand.rollmodifiers.map((record)=>{return {id:record.id, modifiername:record.modifiername, modifiernumber:record.modifiernumber}})
+    rolldies: RollRecord.expand.rolldies.map((record) => {
+      return { id: record.id, diefaces: record.diefaces, dienames: record.dienames }
+    }),
+    rollmodifiers: RollRecord.expand.rollmodifiers.map((record) => {
+      return { id: record.id, modifiername: record.modifiername, modifiernumber: record.modifiernumber }
+    })
   }
-  return RollRecordClean
 }
 
 export async function getOneRollRecordForUpdate(id){
@@ -67,14 +109,17 @@ export async function getOneRollRecordForUpdate(id){
     sort: 'created',
     expand: 'rolldies, rollmodifiers'
   });
-  const RollRecordClean= {
+  return {
     id: RollRecord.id,
     result: RollRecord.result,
     rollname: RollRecord.rollname,
-    rolldies: RollRecord.expand.rolldies.map((record) => {return record.id}),
-    rollmodifiers: RollRecord.expand.rollmodifiers.map((record)=>{return record.id})
+    rolldies: RollRecord.expand.rolldies.map((record) => {
+      return record.id
+    }),
+    rollmodifiers: RollRecord.expand.rollmodifiers.map((record) => {
+      return record.id
+    })
   }
-  return RollRecordClean
 }
 
 export async function getOneDiceRecord(id){

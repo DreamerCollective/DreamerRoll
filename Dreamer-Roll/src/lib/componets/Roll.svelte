@@ -3,24 +3,20 @@
   import Dice from "./Dice.svelte";
   import DiceComboBox from "$lib/componets/DiceComboBox.svelte";
   import ModifierComboBox from "$lib/componets/ModifierComboBox.svelte";
-  import { onMount } from "svelte";
-  import { RollRecord } from "$lib/Store.js";
   export let record
   export let diceRecord
   export let modifierRecord
-  export let iterator
 
-  onMount(async() => {
-    $RollRecord.push(record)
-  })
+  let BoolIfDiceInRoll = IfDiceInRoll()
+  let BollIfModifierInRoll = IfModifierInRoll()
 
   function IfDiceInRoll()
   {
-    if(record.rolldies === null)
+    if(record.rolldies.length === null)
     {
       return false
     }
-    if(!record.rolldies === null)
+    if(record.rolldies.length > 0)
     {
       return true
     }
@@ -28,11 +24,11 @@
 
   function IfModifierInRoll()
   {
-    if(record.rollmodifiers === null)
+    if(record.rollmodifiers.length === null)
     {
       return false
     }
-    if(!record.rollmodifiers === null)
+    if(record.rollmodifiers.length > 0)
     {
       return true
     }
@@ -60,26 +56,26 @@
 
     <div class="relative block w-90% rounded-lg border-2 border-gray-300 p-1 text-center hover:border-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
       <div class="text-sm font-semibold leading-6 text-white">Dice</div>
-      {#if IfDiceInRoll}
+      {#if BoolIfDiceInRoll}
         {#each record.rolldies as recordDice, i}
           <Dice record="{recordDice}" rollrecordid="{record.id}" recordid="{i}"/>
         {/each}
       <DiceComboBox allDiceRecords="{diceRecord}" recordId="{record.id}"/>
       {/if}
-      {#if !IfDiceInRoll}
+      {#if !BoolIfDiceInRoll}
         <DiceComboBox allDiceRecords="{diceRecord}" recordId="{record.id}"/>
       {/if}
     </div>
 
     <div class="relative block w-90% rounded-lg border-2 border-gray-300 p-1 text-center hover:border-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
       <div class="text-sm font-semibold leading-6 text-white">Modifiers</div>
-      {#if IfModifierInRoll}
+      {#if BollIfModifierInRoll}
         {#each record.rollmodifiers as recordModifier, i}
           <Modifier record="{recordModifier}" rollrecordid="{record.id}" recordid="{i}"/>
         {/each}
         <ModifierComboBox allModifierRecords="{modifierRecord}" recordId="{record.id}" />
       {/if}
-      {#if !IfModifierInRoll}
+      {#if !BollIfModifierInRoll}
         <ModifierComboBox allModifierRecords="{modifierRecord}" recordId="{record.id}" />
       {/if}
     </div>

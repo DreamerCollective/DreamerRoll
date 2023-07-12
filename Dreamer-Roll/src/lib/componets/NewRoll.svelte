@@ -2,8 +2,8 @@
   import { ModifiersForNewRoll, DiceForNewRoll } from "$lib/Store.js"
   import Modifier from "./Modifier.svelte";
   import Dice from "./Dice.svelte";
-  import DiceComboBoxForNewRoll from "$lib/componets/DiceComboBoxForNewRoll.svelte";
-  import ModifierComboBoxForNewRoll from "$lib/componets/ModifierComboBoxForNewRoll.svelte";
+  import DiceComboBox from "$lib/componets/DiceComboBox.svelte";
+  import ModifierComboBox from "$lib/componets/ModifierComboBox.svelte";
   import AddNewModifier from "$lib/componets/AddNewModifier.svelte";
   import AddNewDice from "$lib/componets/AddNewDice.svelte";
 
@@ -21,7 +21,7 @@
         {@debug recordDice}
         <Dice record="{recordDice}"/>
       {/each}
-      <DiceComboBoxForNewRoll allDiceRecords="{diceRecord}" />
+      <DiceComboBox allDiceRecords="{diceRecord}" />
       <AddNewDice />
     </div>
     <div class="relative block w-90% rounded-lg border-2 border-gray-300 p-1 text-center hover:border-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
@@ -30,7 +30,7 @@
         {@debug recordModifier}
         <Modifier record="{recordModifier}"/>
       {/each}
-      <ModifierComboBoxForNewRoll allModifierRecords="{modifierRecord}" />
+      <ModifierComboBox allModifierRecords="{modifierRecord}" />
       <AddNewModifier />
     </div>
     <div class="flex">

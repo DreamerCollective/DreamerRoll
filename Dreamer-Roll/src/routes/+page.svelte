@@ -12,8 +12,8 @@
   <div class="px-6 lg:px-8">
     <h1 class=" text-6xl font-bold text-white sm:text-1xl">Dreamer Roll</h1>
     <div class="flex">
-      {#each data.records.AllRollRecords as record, i}
-        <Roll iterator = {i} record = {record} diceRecord = {data.records.AllDiceRecords} modifierRecord = {data.records.AllModifierRecords}/>
+      {#each data.records.AllRollRecords as record}
+        <Roll record = {record} diceRecord = {data.records.AllDiceRecords} modifierRecord = {data.records.AllModifierRecords}/>
       {/each}
       <NewRoll diceRecord = {data.records.AllDiceRecords} modifierRecord = {data.records.AllModifierRecords}/>
     </div>

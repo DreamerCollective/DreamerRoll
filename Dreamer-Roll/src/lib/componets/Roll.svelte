@@ -12,7 +12,7 @@
 
   function IfDiceInRoll()
   {
-    if(record.rolldies.length === null)
+    if(record.rolldies.length === 0)
     {
       return false
     }
@@ -24,7 +24,7 @@
 
   function IfModifierInRoll()
   {
-    if(record.rollmodifiers.length === null)
+    if(record.rollmodifiers.length === 0)
     {
       return false
     }

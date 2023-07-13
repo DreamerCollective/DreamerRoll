@@ -10,7 +10,7 @@
       <input required name="rollrecordid" id="rollrecordid" type="hidden" value="{RollRecordId}"/>
       <input required name="dieid" id="dieid" type="hidden" value="{allDiceRecord.id}"/>
       <button type="submit">
-        <span class="block truncate">Name {allDiceRecord.dienames} Dice Faces {allDiceRecord.diefaces}</span>
+        <span class="block truncate">Name {allDiceRecord.diename} Dice Faces {allDiceRecord.diefaces}</span>
       </button>
     </div>
   </div>

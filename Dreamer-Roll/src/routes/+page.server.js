@@ -17,7 +17,7 @@ export async function load() {
       console.log("Error: ", e);
     }
 }
-export async function getAllRollRecord() {
+async function getAllRollRecord() {
   const RollRecord = await pb.collection('roll').getFullList({
     sort: 'created',
     expand: 'rolldies, rollmodifiers'
@@ -25,7 +25,7 @@ export async function getAllRollRecord() {
   console.log(RollRecord)
   const results = RollRecord.map((record) =>
     {
-      if(record.rolldies.length === null)
+      if(record.rolldies.length === 0)
       {
         const returnobject = {
           id: record.id, rollname: record.rollname, result: record.result,
@@ -38,12 +38,12 @@ export async function getAllRollRecord() {
         console.log(returnobject)
         return returnobject
       }
-      if(record.rollmodifiers.length === null)
+      else if(record.rollmodifiers.length === 0)
       {
         const returnobject = {
           id: record.id, rollname: record.rollname, result: record.result,
           rolldies: record.expand.rolldies.map((record) => {
-            return { id: record.id, diefaces: record.diefaces, dienames: record.dienames }
+            return { id: record.id, diefaces: record.diefaces, diename: record.diename }
           }),
           rollmodifiers: []
         }
@@ -51,14 +51,18 @@ export async function getAllRollRecord() {
         console.log(returnobject)
         return returnobject
       }
-      if(record.rolldies.length === null && record.rollmodifiers.length === null)
+      else if(record.rolldies.length < 0 && record.rollmodifiers.length < 0)
       {
         const returnobject = {
           id: record.id, rollname: record.rollname, result: record.result,
-          rolldies: [],
-          rollmodifiers: []
+          rolldies: record.expand.rolldies.map((record) => {
+            return { id: record.id, diefaces: record.diefaces, diename: record.diename }
+          }),
+          rollmodifiers: record.expand.rollmodifiers.map((record) => {
+            return { id: record.id, modifiername: record.modifiername, modifiernumber: record.modifiernumber }
+          })
         }
-        console.log("GetOneRollRecordForUpdate rollmodifiers.length = 0")
+        console.log("GetOneRollRecordForUpdate rolldies and rollmodifiers")
         console.log(returnobject)
         return returnobject
       }
@@ -66,32 +70,30 @@ export async function getAllRollRecord() {
       {
         const returnobject = {
           id: record.id, rollname: record.rollname, result: record.result,
-          rolldies: record.expand.rolldies.map((record) => {
-            return { id: record.id, diefaces: record.diefaces, dienames: record.dienames }
-          }),
-          rollmodifiers: record.expand.rollmodifiers.map((record) => {
-            return { id: record.id, modifiername: record.modifiername, modifiernumber: record.modifiernumber }
-          })
+          rolldies: [],
+          rollmodifiers: []
         }
-        console.log("GetOneRollRecordForUpdate rollmodifiers.length = 0")
+        console.log("GetOneRollRecordForUpdate rollmodifiers.length = 0 rolldies.length = 0")
         console.log(returnobject)
         return returnobject
       }
     }
   )
+  console.log("getAllRollRecord results")
+  console.log(results)
   return results;
 }
 
-export async function getAllDiceRecord(){
+async function getAllDiceRecord(){
   const DiceRecord = await pb.collection('die').getFullList({
     sort: 'created',
   });
-  const results = DiceRecord.map((record)=> {return {id:record.id, diefaces:record.diefaces, dienames:record.dienames}})
+  const results = DiceRecord.map((record)=> {return {id:record.id, diefaces:record.diefaces, diename:record.diename}})
   console.log('GetAllDiceRecord = ' + DiceRecord)
   return results
 }
 
-export async function getAllModifierRecord(){
+async function getAllModifierRecord(){
   const ModifierRecord = await pb.collection('modifier').getFullList({
     sort: 'created',
   });
@@ -100,7 +102,7 @@ export async function getAllModifierRecord(){
   return results
 }
 
-export async function getWholeOneRollRecordForUpdate(id){
+async function getWholeOneRollRecordForUpdate(id){
   console.log('getOneRollRecordRawId =' + id)
   const RollRecord = await pb.collection('roll').getOne(id, {
     sort: 'created',
@@ -118,19 +120,19 @@ export async function getWholeOneRollRecordForUpdate(id){
     console.log(returnobject)
     return returnobject;
   }
-  if(RollRecord.rollmodifiers.length === 0)
+  else if(RollRecord.rollmodifiers.length === 0)
   {
     const returnobject = {
       id: RollRecord.id, rollname: RollRecord.rollname, result: RollRecord.result,
       rolldies: RollRecord.expand.rolldies.map((record) => {
-        return { id: record.id, diefaces: record.diefaces, dienames: record.dienames }
+        return { id: record.id, diefaces: record.diefaces, diename: record.diename }
       }),
       rollmodifiers: []
     }
     console.log(returnobject)
     return returnobject;
   }
-  if(RollRecord.rollmodifiers.length === 0 && RollRecord.rolldies.length === 0)
+  else if(RollRecord.rollmodifiers.length === 0 && RollRecord.rolldies.length === 0)
   {
     const returnobject = {
       id: RollRecord.id, rollname: RollRecord.rollname, result: RollRecord.result,
@@ -145,7 +147,7 @@ export async function getWholeOneRollRecordForUpdate(id){
     const returnobject = {
       id: RollRecord.id, rollname: RollRecord.rollname, result: RollRecord.result,
       rolldies: RollRecord.expand.rolldies.map((record) => {
-        return { id: record.id, diefaces: record.diefaces, dienames: record.dienames }
+        return { id: record.id, diefaces: record.diefaces, diename: record.diename }
       }),
       rollmodifiers: RollRecord.expand.rollmodifiers.map((record) => {
         return { id: record.id, modifiername: record.modifiername, modifiernumber: record.modifiernumber }
@@ -156,7 +158,7 @@ export async function getWholeOneRollRecordForUpdate(id){
   }
 }
 
-export async function getOneRollRecordForUpdate(id){
+async function getOneRollRecordForUpdate(id){
   console.log('getOneRollRecordRawId =' + id)
   const RollRecord = await pb.collection('roll').getOne(id, {
     sort: 'created',
@@ -177,7 +179,7 @@ export async function getOneRollRecordForUpdate(id){
     console.log(returnobject)
     return returnobject;
   }
-  if(RollRecord.rollmodifiers.length === 0)
+  else if(RollRecord.rollmodifiers.length === 0)
   {
     const returnobject = {
       id: RollRecord.id, rollname: RollRecord.rollname, result: RollRecord.result,
@@ -190,7 +192,7 @@ export async function getOneRollRecordForUpdate(id){
     console.log(returnobject)
     return returnobject;
   }
-  if(RollRecord.rollmodifiers.length === 0 && RollRecord.rolldies.length === 0)
+  else if(RollRecord.rollmodifiers.length === 0 && RollRecord.rolldies.length === 0)
   {
     const returnobject = {
       id: RollRecord.id, rollname: RollRecord.rollname, result: RollRecord.result,
@@ -218,20 +220,20 @@ export async function getOneRollRecordForUpdate(id){
   }
 }
 
-export async function getOneDiceRecord(id){
+async function getOneDiceRecord(id){
   console.log('getOneDiceRecordRawId =' + id)
   const DiceRecord = await pb.collection('die').getOne(id);
   console.log('GetOneDiceRecord = ' + DiceRecord)
   const DiceRecordClean = {
     id: DiceRecord.id,
-    diename: DiceRecord.dienames,
+    diename: DiceRecord.diename,
     diefaces: DiceRecord.diefaces
   }
   console.log('Returning record = ' + DiceRecordClean)
   return DiceRecordClean
 }
 
-export async function getOneModifierRecord(id){
+async function getOneModifierRecord(id){
   const ModifierRecord = await pb.collection('modifier').getOne(id);
   return {
     id: ModifierRecord.id,
@@ -242,26 +244,47 @@ export async function getOneModifierRecord(id){
 
 function rollRoll(record)
 {
-  let roll = 0
-  for (let i = 0; i < record.rolldies.length; i++)
-  {
-    roll += random.int(1, record.rolldies[i].diefaces)
+  let roll = 0;
+  if(record.rolldies.length === 0){
+    for (let i = 0; i < record.rollmodifiers.length; i++)
+    {
+      roll += record.rollmodifiers[i].modifiernumber
+    }
+    return roll;
   }
-  for (let i = 0; i < record.rollmodifiers.length; i++)
-  {
-    roll += record.rollmodifiers[i].modifiernumber
+  else if(record.rollmodifiers.length === 0){
+    for (let i = 0; i < record.rolldies.length; i++)
+    {
+      roll += random.int(1, record.rolldies[i].diefaces)
+    }
+    return roll;
   }
-  return roll;
+  else if(record.rolldies.length === 0 && record.rollmodifiers.length === 0)
+  {
+    return 0;
+  }
+  else
+  {
+    for (let i = 0; i < record.rolldies.length; i++)
+    {
+      roll += random.int(1, record.rolldies[i].diefaces)
+    }
+    for (let i = 0; i < record.rollmodifiers.length; i++)
+    {
+      roll += record.rollmodifiers[i].modifiernumber
+    }
+    return roll;
+  }
 }
 export const actions = {
   CreateDiceRecord: async ({ request }) => {
     const form = await request.formData()
 
-    const dienames = form.get('dicenames') ?? '';
-    const diefaces = form.get('dicefaces') ?? '';
+    const diename = form.get('diename') ?? '';
+    const diefaces = form.get('diefaces') ?? '';
 
     const CreateRecord = {
-      dienames,
+      diename,
       diefaces,
     }
 

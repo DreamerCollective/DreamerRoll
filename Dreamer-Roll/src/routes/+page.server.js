@@ -1,27 +1,26 @@
 import { pb } from "$lib/pocketbase.js";
 import random from "random";
 
-export async function load() {
-    try{
-      const AllRollRecords = await getAllRollRecord()
-      const AllModifierRecords = await getAllModifierRecord()
-      const AllDiceRecords = await getAllDiceRecord()
-      return {
-        records: {
-          AllRollRecords: AllRollRecords,
-          AllModifierRecords: AllModifierRecords,
-          AllDiceRecords: AllDiceRecords
-        }
+export async function load()
+{
+    const AllRollRecords = await getAllRollRecord()
+    const AllModifierRecords = await getAllModifierRecord()
+    const AllDiceRecords = await getAllDiceRecord()
+    return {
+      records: {
+        AllRollRecords: AllRollRecords,
+        AllModifierRecords: AllModifierRecords,
+        AllDiceRecords: AllDiceRecords
       }
-    }catch (e) {
-      console.log("Error: ", e);
     }
+
 }
 async function getAllRollRecord() {
   const RollRecord = await pb.collection('roll').getFullList({
     sort: 'created',
     expand: 'rolldies, rollmodifiers'
   });
+  console.log("RollRecord")
   console.log(RollRecord)
   const results = RollRecord.map((record) =>
     {
@@ -51,7 +50,23 @@ async function getAllRollRecord() {
         console.log(returnobject)
         return returnobject
       }
+      else if(record.expand === null)
+      {
+        console.log("error")
+        const returnobject = {
+          id: record.id, rollname: record.rollname, result: record.result,
+          rolldies: [],
+          rollmodifiers: [],
+        }
+        console.log("GetOneRollRecordForUpdate rollmodifiers.length = 0 rolldies.length = 0")
+        console.log(returnobject)
+        return returnobject
+      }
       else if(record.rolldies.length < 0 && record.rollmodifiers.length < 0)
+      {
+
+      }
+      else
       {
         const returnobject = {
           id: record.id, rollname: record.rollname, result: record.result,
@@ -63,17 +78,6 @@ async function getAllRollRecord() {
           })
         }
         console.log("GetOneRollRecordForUpdate rolldies and rollmodifiers")
-        console.log(returnobject)
-        return returnobject
-      }
-      else
-      {
-        const returnobject = {
-          id: record.id, rollname: record.rollname, result: record.result,
-          rolldies: [],
-          rollmodifiers: []
-        }
-        console.log("GetOneRollRecordForUpdate rollmodifiers.length = 0 rolldies.length = 0")
         console.log(returnobject)
         return returnobject
       }
@@ -89,7 +93,8 @@ async function getAllDiceRecord(){
     sort: 'created',
   });
   const results = DiceRecord.map((record)=> {return {id:record.id, diefaces:record.diefaces, diename:record.diename}})
-  console.log('GetAllDiceRecord = ' + DiceRecord)
+  console.log('GetAllDiceRecord = ')
+  console.log(DiceRecord)
   return results
 }
 
@@ -98,7 +103,8 @@ async function getAllModifierRecord(){
     sort: 'created',
   });
   const results = ModifierRecord.map((record)=>{return {id:record.id, modifiername:record.modifiername, modifiernumber:record.modifiernumber}})
-  console.log('GetAllModifierRecord = ' + ModifierRecord)
+  console.log('GetAllModifierRecord = ')
+  console.log(ModifierRecord)
   return results
 }
 

@@ -20,11 +20,11 @@ async function getAllRollRecord() {
     sort: 'created',
     expand: 'rolldies, rollmodifiers'
   });
-  console.log("RollRecord")
+  console.log("New RollRecord")
   console.log(RollRecord)
   const results = RollRecord.map((record) =>
     {
-      if(record.rolldies.length === 0)
+      if(record.rolldies === null && record.rollmodifiers === true)
       {
         const returnobject = {
           id: record.id, rollname: record.rollname, result: record.result,
@@ -37,7 +37,7 @@ async function getAllRollRecord() {
         console.log(returnobject)
         return returnobject
       }
-      else if(record.rollmodifiers.length === 0)
+      else if(record.rollmodifiers === null && record.rolldies === true)
       {
         const returnobject = {
           id: record.id, rollname: record.rollname, result: record.result,
@@ -50,7 +50,7 @@ async function getAllRollRecord() {
         console.log(returnobject)
         return returnobject
       }
-      else if(record.expand === null)
+      else if(record.rollmodifiers === null && record.rolldies === null)
       {
         console.log("error")
         const returnobject = {
@@ -62,11 +62,7 @@ async function getAllRollRecord() {
         console.log(returnobject)
         return returnobject
       }
-      else if(record.rolldies.length < 0 && record.rollmodifiers.length < 0)
-      {
-
-      }
-      else
+      else if(record.rollmodifiers.length > 0 && record.rolldies.length > 0)
       {
         const returnobject = {
           id: record.id, rollname: record.rollname, result: record.result,
@@ -78,6 +74,18 @@ async function getAllRollRecord() {
           })
         }
         console.log("GetOneRollRecordForUpdate rolldies and rollmodifiers")
+        console.log(returnobject)
+        return returnobject
+      }
+      else
+      {
+        console.log("error")
+        const returnobject = {
+          id: record.id, rollname: record.rollname, result: record.result,
+          rolldies: [],
+          rollmodifiers: [],
+        }
+        console.log("GetOneRollRecordForUpdate else rollmodifiers.length = 0 rolldies.length = 0")
         console.log(returnobject)
         return returnobject
       }
@@ -114,7 +122,7 @@ async function getWholeOneRollRecordForUpdate(id){
     sort: 'created',
     expand: 'rolldies, rollmodifiers'
   });
-  if(RollRecord.rolldies.length === 0)
+  if(RollRecord.rolldies === null && RollRecord.rollmodifiers.length > 0)
   {
     const returnobject = {
       id: RollRecord.id, rollname: RollRecord.rollname, result: RollRecord.result,
@@ -123,10 +131,11 @@ async function getWholeOneRollRecordForUpdate(id){
         return { id: record.id, modifiername: record.modifiername, modifiernumber: record.modifiernumber }
       })
     }
+    console.log("GetOneRollRecordForUpdate rollmodifiers.length = 0")
     console.log(returnobject)
-    return returnobject;
+    return returnobject
   }
-  else if(RollRecord.rollmodifiers.length === 0)
+  else if(RollRecord.rollmodifiers === null && RollRecord.rolldies.length > 0)
   {
     const returnobject = {
       id: RollRecord.id, rollname: RollRecord.rollname, result: RollRecord.result,
@@ -135,20 +144,22 @@ async function getWholeOneRollRecordForUpdate(id){
       }),
       rollmodifiers: []
     }
+    console.log("GetOneRollRecordForUpdate rollmodifiers.length = 0")
     console.log(returnobject)
-    return returnobject;
+    return returnobject
   }
-  else if(RollRecord.rollmodifiers.length === 0 && RollRecord.rolldies.length === 0)
+  else if(RollRecord.rollmodifiers === null && RollRecord.rolldies === null)
   {
     const returnobject = {
       id: RollRecord.id, rollname: RollRecord.rollname, result: RollRecord.result,
       rolldies: [],
-      rollmodifiers:[]
+      rollmodifiers: [],
     }
+    console.log("GetOneRollRecordForUpdate rollmodifiers.length = 0 rolldies.length = 0")
     console.log(returnobject)
-    return returnobject;
+    return returnobject
   }
-  else
+  else if(RollRecord.rollmodifiers.length > 0 && RollRecord.rolldies.length > 0)
   {
     const returnobject = {
       id: RollRecord.id, rollname: RollRecord.rollname, result: RollRecord.result,
@@ -159,8 +170,21 @@ async function getWholeOneRollRecordForUpdate(id){
         return { id: record.id, modifiername: record.modifiername, modifiernumber: record.modifiernumber }
       })
     }
+    console.log("GetOneRollRecordForUpdate rolldies and rollmodifiers")
     console.log(returnobject)
-    return returnobject;
+    return returnobject
+  }
+  else
+  {
+    console.log("error")
+    const returnobject = {
+      id: RollRecord.id, rollname: RollRecord.rollname, result: RollRecord.result,
+      rolldies: [],
+      rollmodifiers: [],
+    }
+    console.log("GetOneRollRecordForUpdate else rollmodifiers.length = 0 rolldies.length = 0")
+    console.log(returnobject)
+    return returnobject
   }
 }
 
@@ -172,7 +196,7 @@ async function getOneRollRecordForUpdate(id){
   });
   console.log("GetOneRollRecordForUpdate RollRecord")
   console.log(RollRecord)
-  if(RollRecord.rolldies.length === 0)
+  if(RollRecord.rolldies === null && RollRecord.rollmodifiers.length > 0)
   {
     const returnobject = {
       id: RollRecord.id, rollname: RollRecord.rollname, result: RollRecord.result,
@@ -185,7 +209,7 @@ async function getOneRollRecordForUpdate(id){
     console.log(returnobject)
     return returnobject;
   }
-  else if(RollRecord.rollmodifiers.length === 0)
+  else if(RollRecord.rollmodifiers === null && RollRecord.rolldies.length > 0)
   {
     const returnobject = {
       id: RollRecord.id, rollname: RollRecord.rollname, result: RollRecord.result,
@@ -198,7 +222,7 @@ async function getOneRollRecordForUpdate(id){
     console.log(returnobject)
     return returnobject;
   }
-  else if(RollRecord.rollmodifiers.length === 0 && RollRecord.rolldies.length === 0)
+  else if(RollRecord.rollmodifiers === null && RollRecord.rolldies === null)
   {
     const returnobject = {
       id: RollRecord.id, rollname: RollRecord.rollname, result: RollRecord.result,
@@ -209,7 +233,7 @@ async function getOneRollRecordForUpdate(id){
     console.log(returnobject)
     return returnobject;
   }
-  else
+  else if(RollRecord.rollmodifiers.length > 0 && RollRecord.rolldies.length > 0)
   {
     const returnobject = {
       id: RollRecord.id, rollname: RollRecord.rollname, result: RollRecord.result,
@@ -223,6 +247,18 @@ async function getOneRollRecordForUpdate(id){
     console.log("GetOneRollRecordForUpdate else")
     console.log(returnobject)
     return returnobject;
+  }
+  else
+  {
+    console.log("error")
+    const returnobject = {
+      id: RollRecord.id, rollname: RollRecord.rollname, result: RollRecord.result,
+      rolldies: [],
+      rollmodifiers: [],
+    }
+    console.log("GetOneRollRecordForUpdate else rollmodifiers.length = 0 rolldies.length = 0")
+    console.log(returnobject)
+    return returnobject
   }
 }
 

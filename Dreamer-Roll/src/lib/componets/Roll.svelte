@@ -12,29 +12,16 @@
 
   function IfDiceInRoll()
   {
-    if(record.rolldies.length === 0)
-    {
-      return false
-    }
-    if(record.rolldies.length > 0)
-    {
-      return true
-    }
+    return record.rolldies !== null;
   }
 
   function IfModifierInRoll()
   {
-    if(record.rollmodifiers.length === 0)
-    {
-      return false
-    }
-    if(record.rollmodifiers.length > 0)
-    {
-      return true
-    }
+    return record.rollmodifiers !== null;
   }
 
 </script>
+{@debug record}
 <div class="mt-6 my-1 mx-0.5 divide-y divide-gray-500/25space-y-2 py-2 sm:py-12 lg:py-16">
   <div class="relative block rounded-lg border-2 border-gray-300 p-1 text-center hover:border-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
     <div class="flex">

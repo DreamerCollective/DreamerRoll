@@ -8,7 +8,7 @@
 <div class="relative isolate bg-gray-900">
   <div class="px-6 lg:px-8">
     <h1 class=" text-6xl font-bold text-white sm:text-1xl">Dreamer Roll</h1>
-    <div class="flex">
+    <div class="flex flex-wrap">
       {#each data.records.AllRollRecords as record}
         <Roll record = {record} diceRecord = {data.records.AllDiceRecords} modifierRecord = {data.records.AllModifierRecords}/>
       {/each}

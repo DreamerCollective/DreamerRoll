@@ -1,6 +1,6 @@
 <script>
   import {applyAction, enhance} from "$app/forms";
-  import {pb} from '$lib/pocketbase.js';
+  import {pb} from '$lib/server/pocketbase.js';
 </script>
 
 <div class="flex min-h-full flex-col justify-center py-12 sm:px-6 lg:px-8">

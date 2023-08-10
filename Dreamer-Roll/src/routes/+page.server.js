@@ -1,4 +1,4 @@
-import { pb } from "$lib/pocketbase.js";
+import { pb } from "$lib/server/pocketbase.js";
 import random from "random";
 
 export async function load()
@@ -22,31 +22,39 @@ async function getAllRollRecord() {
   });
   console.log("New RollRecord")
   console.log(RollRecord)
-  return RollRecord.map((record) => {
-      if (record.rolldies.length === 0 && record.rollmodifiers.length > 0) {
-        return {
+  return RollRecord.map((record) =>
+    {
+      if (record.rolldies.length === 0 && record.rollmodifiers.length > 0)
+      {
+        return{
           id: record.id, rollname: record.rollname, result: record.result,
           rolldies: [],
-          rollmodifiers: record.expand.rollmodifiers.map((record) => {
+          rollmodifiers: record.expand.rollmodifiers.map((record) =>
+          {
             return { id: record.id, modifiername: record.modifiername, modifiernumber: record.modifiernumber }
           })
         }
-      } else if (record.rollmodifiers.length === 0 && record.rolldies.length > 0) {
-        return {
+      }
+      else if (record.rollmodifiers.length === 0 && record.rolldies.length > 0)
+      {
+        return{
           id: record.id, rollname: record.rollname, result: record.result,
           rolldies: record.expand.rolldies.map((record) => {
             return { id: record.id, diefaces: record.diefaces, diename: record.diename }
           }),
           rollmodifiers: []
         }
-      } else if (record.rollmodifiers === null && record.rolldies === null) {
+      }
+      else if (record.rollmodifiers === null && record.rolldies === null)
+      {
         console.log("error")
         return {
           id: record.id, rollname: record.rollname, result: record.result,
           rolldies: [],
           rollmodifiers: [],
         }
-      } else if (record.rollmodifiers.length > 0 && record.rolldies.length > 0) {
+      }
+      else if (record.rollmodifiers.length > 0 && record.rolldies.length > 0) {
         return {
           id: record.id, rollname: record.rollname, result: record.result,
           rolldies: record.expand.rolldies.map((record) => {
@@ -56,7 +64,9 @@ async function getAllRollRecord() {
             return { id: record.id, modifiername: record.modifiername, modifiernumber: record.modifiernumber }
           })
         }
-      } else {
+      }
+      else
+      {
         console.log("error")
         return {
           id: record.id, rollname: record.rollname, result: record.result,
@@ -72,6 +82,8 @@ async function getAllDiceRecord(){
   const DiceRecord = await pb.collection('die').getFullList({
     sort: 'created',
   });
+  console.log("New DiceRecord")
+  console.log(DiceRecord)
   return DiceRecord.map((record) => {
     return { id: record.id, diefaces: record.diefaces, diename: record.diename }
   })
@@ -81,6 +93,8 @@ async function getAllModifierRecord(){
   const ModifierRecord = await pb.collection('modifier').getFullList({
     sort: 'created',
   });
+  console.log("New ModifierRecord")
+  console.log(ModifierRecord)
   return ModifierRecord.map((record) => {
     return { id: record.id, modifiername: record.modifiername, modifiernumber: record.modifiernumber }
   })
@@ -222,14 +236,16 @@ async function getOneRollRecordForUpdate(id){
 function rollRoll(record)
 {
   let roll = 0;
-  if(record.rolldies.length === 0){
+  if(record.rolldies.length === 0)
+  {
     for (let i = 0; i < record.rollmodifiers.length; i++)
     {
       roll += record.rollmodifiers[i].modifiernumber
     }
     return roll;
   }
-  else if(record.rollmodifiers.length === 0){
+  else if(record.rollmodifiers.length === 0)
+  {
     for (let i = 0; i < record.rolldies.length; i++)
     {
       roll += random.int(1, record.rolldies[i].diefaces)

@@ -1,7 +1,7 @@
 <script>
-  import "../app.postcss";
   import {applyAction, enhance} from "$app/forms"
-  import { currentUser,pb } from "$lib/pocketbase.js";
+
+  //export let data;
 
 </script>
 <div>
@@ -10,7 +10,7 @@
       <div class="flex lg:flex-1">
         <a href="/" class="-m-1.5 p-1.5">
           <span class="sr-only">Your Company</span>
-          <img class="h-8 w-auto" src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500" alt="">
+          <img class="h-8 w-auto" src="src/Assets/Dreamer-Logo.webp" alt="Dreamer Logo">
         </a>
       </div>
       <div class="flex lg:hidden">
@@ -22,15 +22,15 @@
         </button>
       </div>
       <div class="hidden lg:flex lg:flex-1 lg:justify-end">
-        {#if $currentUser}
+        <!--{#if data}-->
           <a href="/" class="text-sm mx-1 font-semibold leading-6 text-white">Logout</a>
-          <li><a href="/"> Signed in as {$currentUser.email}</a></li>
-      {:else }
-        <div class="flex">
-          <a href="/Signup" class="text-sm mx-1 font-semibold leading-6 text-white">Register</a>
-          <a href="/Login" class="text-sm mx-1 font-semibold leading-6 text-white">Log in <span aria-hidden="true">&rarr;</span></a>
-        </div>
-      {/if}
+        <!--<li><a href="/"> Signed in as {data.email}</a></li> -->
+   <!-- {:else }-->
+      <div class="flex">
+        <a href="/Signup" class="text-sm mx-1 font-semibold leading-6 text-white">Register</a>
+        <a href="/Login" class="text-sm mx-1 font-semibold leading-6 text-white">Log in <span aria-hidden="true">&rarr;</span></a>
+      </div>
+    <!--{/if} -->
       </div>
     </nav>
   </header>

@@ -1,4 +1,4 @@
-import {pb} from "$lib/pocketbase.js";
+import {pb} from "$lib/server/pocketbase.js";
 
 
 export const actions ={

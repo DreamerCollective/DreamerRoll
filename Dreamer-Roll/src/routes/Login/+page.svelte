@@ -1,6 +1,6 @@
 <script lang="ts">
   import {applyAction, enhance} from "$app/forms";
-  import {pb} from '$lib/pocketbase';
+  import {pb} from '$lib/server/pocketbase';
 </script>
 
 <div class="flex min-h-full flex-col justify-center py-12 sm:px-6 lg:px-8">

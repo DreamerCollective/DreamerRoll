@@ -56,7 +56,7 @@
       </button>
     </div>
     {#if BoolIsRollVisible}
-    <div class="flex">
+    <div>
       <form method="POST" action="?/UpdateRollRecordWithNewName" use:enhance>
         <div class="flex">
           <div>

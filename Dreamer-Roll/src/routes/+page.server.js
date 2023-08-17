@@ -4,11 +4,13 @@ import random from "random";
 export async function load()
 {
     const AllRollRecords = await getAllRollRecord()
+    const AllRollGroupRecords = await getAllRollGroupRecord()
     const AllModifierRecords = await getAllModifierRecord()
     const AllDiceRecords = await getAllDiceRecord()
     return {
       records: {
         AllRollRecords: AllRollRecords,
+        AllRollGroupRecords: AllRollGroupRecords,
         AllModifierRecords: AllModifierRecords,
         AllDiceRecords: AllDiceRecords
       }
@@ -68,10 +70,39 @@ async function getAllRollRecord() {
       else
       {
         console.log("error")
+        console.log(record.id)
         return {
           id: record.id, rollname: record.rollname, result: record.result,
           rolldies: [],
           rollmodifiers: [],
+        }
+      }
+    }
+  );
+}
+
+async function getAllRollGroupRecord() {
+  const RollGroupRecord = await pb.collection('rollgroup').getFullList({
+    sort: 'created',
+    expand: 'rolls',
+  });
+  console.log("New RollRecord")
+  console.log(RollGroupRecord)
+  return RollGroupRecord.map((record) =>
+    {
+      if (record.rolls.length > 0) {
+        return {
+          id: record.id, rollgroupname: record.rollgroupname,
+          rolls: record.expand.rolls.map(async (record) => {
+            await getWholeOneRollRecordForUpdate(record.id)
+          }),
+        }
+      }
+      if (record.rolls.length === 0)
+      {
+        return {
+          id: record.id, rollgroupname: record.rollgroupname,
+          rolls: [],
         }
       }
     }
@@ -311,6 +342,20 @@ export const actions = {
       result,
       rolldies,
       rollmodifiers
+    }
+
+    await pb.collection('roll').create(CreateRecord)
+  },
+
+  CreateRollGroupRecord: async ({ request }) => {
+    const form = await request.formData()
+
+    const rollgroupname = form.get('RollGroupName') ?? '';
+    const rolls = [];
+
+    const CreateRecord = {
+      rollgroupname,
+      rolls,
     }
 
     await pb.collection('roll').create(CreateRecord)

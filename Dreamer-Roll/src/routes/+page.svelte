@@ -3,6 +3,9 @@
   import Roll from "$lib/componets/Roll.svelte";
   import NewRoll from "$lib/componets/NewRoll.svelte";
   import DiceModifierListAndEdit from "$lib/componets/DiceModifierListAndEdit.svelte";
+  import RollList from "$lib/componets/RollList.svelte";
+  import RollGroup from "$lib/componets/RollGroup.svelte";
+  import NewRollGroup from "$lib/componets/NewRollGroup.svelte";
   export let data;
 
 </script>
@@ -10,14 +13,11 @@
   <div class="px-6 lg:px-8">
     <h1 class=" text-6xl font-bold text-white sm:text-1xl">Dreamer Roll</h1>
     <DiceModifierListAndEdit diceRecord = {data.records.AllDiceRecords} modifierRecord = {data.records.AllModifierRecords}/>
-    <div class=" relative block w-90% rounded-lg border-2 border-gray-300 p-1 text-center hover:border-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
-      <div class="flex flex-wrap">
-        {#each data.records.AllRollRecords as record}
-          <Roll record = {record} diceRecord = {data.records.AllDiceRecords} modifierRecord = {data.records.AllModifierRecords}/>
-        {/each}
-        <NewRoll diceRecord = {data.records.AllDiceRecords} modifierRecord = {data.records.AllModifierRecords}/>
-      </div>
-    </div>
+    <RollList record = {data.records.AllRollRecords} diceRecord = {data.records.AllDiceRecords} modifierRecord = {data.records.AllModifierRecords}/>
+    {#each data.records.AllRollGroupRecords as record}
+      <RollGroup {record} diceRecord = {data.records.AllDiceRecords} modifierRecord = {data.records.AllDiceRecords}/>
+    {/each}
+    <NewRollGroup />
   </div>
   <div class="absolute inset-x-0 top-[calc(100%-13rem)] -z-10 transform-gpu overflow-hidden blur-3xl sm:top-[calc(100%-30rem)]">
     <svg class="relative left-[calc(50%+3rem)] h-[21.1875rem] max-w-none -translate-x-1/2 sm:left-[calc(50%+36rem)] sm:h-[42.375rem]" viewBox="0 0 1155 678">

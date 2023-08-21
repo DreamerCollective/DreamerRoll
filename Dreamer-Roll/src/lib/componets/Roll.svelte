@@ -22,10 +22,16 @@
     return record.rolldies !== null;
   }
 
+  console.log("Record Rolldies")
+  console.log(record.rolldies)
+
   function IfModifierInRoll()
   {
     return record.rollmodifiers !== null;
   }
+
+  console.log("Record Rollmodifiers")
+  console.log(record.rollmodifiers)
 
   function IsRollVisible()
   {
@@ -88,7 +94,7 @@
           {#each record.rolldies as recordDice, i}
             <Dice record="{recordDice}" rollrecordid="{record.id}" recordid="{i}"/>
           {/each}
-        <DiceComboBox allDiceRecords="{diceRecord}" recordId="{record.id}"/>
+          <DiceComboBox allDiceRecords="{diceRecord}" recordId="{record.id}"/>
           <AddNewDice />
         {/if}
         {#if !BoolIfDiceInRoll}

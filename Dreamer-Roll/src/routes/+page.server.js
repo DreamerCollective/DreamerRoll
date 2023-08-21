@@ -84,7 +84,7 @@ async function getAllRollRecord() {
 async function getAllRollGroupRecord() {
   const RollGroupRecord = await pb.collection('rollgroup').getFullList({
     sort: 'created',
-    expand: 'rolls',
+    expand: 'rolls,rolls.rolldies,rolls.rollmodifiers',
   });
   console.log("New RollRecord")
   console.log(RollGroupRecord)
@@ -93,12 +93,62 @@ async function getAllRollGroupRecord() {
       if (record.rolls.length > 0) {
         return {
           id: record.id, rollgroupname: record.rollgroupname,
-          rolls: record.expand.rolls.map(async (record) => {
-            await getWholeOneRollRecordForUpdate(record.id)
+          rolls: record.expand.rolls.map((record) => {
+            if (record.rolldies.length === 0 && record.rollmodifiers.length > 0)
+            {
+              return{
+                id: record.id, rollname: record.rollname, result: record.result,
+                rolldies: [],
+                rollmodifiers: record.expand.rollmodifiers.map((record) =>
+                {
+                  return { id: record.id, modifiername: record.modifiername, modifiernumber: record.modifiernumber }
+                })
+              }
+            }
+            else if (record.rollmodifiers.length === 0 && record.rolldies.length > 0)
+            {
+              return{
+                id: record.id, rollname: record.rollname, result: record.result,
+                rolldies: record.expand.rolldies.map((record) => {
+                  return { id: record.id, diefaces: record.diefaces, diename: record.diename }
+                }),
+                rollmodifiers: []
+              }
+            }
+            else if (record.rollmodifiers === null && record.rolldies === null)
+            {
+              console.log("error")
+              return {
+                id: record.id, rollname: record.rollname, result: record.result,
+                rolldies: [],
+                rollmodifiers: [],
+              }
+            }
+            else if (record.rollmodifiers.length > 0 && record.rolldies.length > 0) {
+              return {
+                id: record.id, rollname: record.rollname, result: record.result,
+                rolldies: record.expand.rolldies.map((record) => {
+                  return { id: record.id, diefaces: record.diefaces, diename: record.diename }
+                }),
+                rollmodifiers: record.expand.rollmodifiers.map((record) => {
+                  return { id: record.id, modifiername: record.modifiername, modifiernumber: record.modifiernumber }
+                })
+              }
+            }
+            else
+            {
+              console.log("error")
+              console.log(record.id)
+              return {
+                id: record.id, rollname: record.rollname, result: record.result,
+                rolldies: [],
+                rollmodifiers: [],
+              }
+            }
           }),
         }
       }
-      if (record.rolls.length === 0)
+      else if (record.rolls.length === 0)
       {
         return {
           id: record.id, rollgroupname: record.rollgroupname,
@@ -132,7 +182,6 @@ async function getAllModifierRecord(){
 }
 
 async function getWholeOneRollRecordForUpdate(id){
-  console.log('getOneRollRecordRawId =' + id)
   const RollRecord = await pb.collection('roll').getOne(id, {
     sort: 'created',
     expand: 'rolldies, rollmodifiers'
@@ -358,7 +407,7 @@ export const actions = {
       rolls,
     }
 
-    await pb.collection('roll').create(CreateRecord)
+    await pb.collection('rollgroup').create(CreateRecord)
   },
 
 
@@ -467,13 +516,49 @@ export const actions = {
       rollname: RollRecordToUpdate.rollname
     }
 
-    console.log(RollRecordToUpdateObject)
-
     RollRecordToUpdate.rollmodifiers.splice(modifierid,1)
 
-    console.log(RollRecordToUpdateObject)
-
     await pb.collection('roll').update(RollId, RollRecordToUpdateObject)
+  },
+
+  UpdateRollGroupRecordToRemoveRoll: async ({ request }) => {
+    const form = await request.formData()
+
+    const rollgroupname = form.get('rollgroupname') ?? '';
+    const rollgrouprolls = form.get('rollgrouprolls') ?? '';
+    const rollgrouprollsid = form.get('rollgrouprollsid') ?? '';
+    const rollgroupid = form.get('rollgroupid') ?? '';
+
+    //let RollRecordToUpdate = await getOneRollRecordForUpdate(RollId)
+
+    const RollRecordToUpdateObject = {
+      rollgroupname: rollgroupname,
+      rolls: rollgrouprolls,
+    }
+
+    RollRecordToUpdateObject.rolls.splice(rollgrouprollsid, 1)
+
+    await pb.collection('roll').update(rollgroupid, RollRecordToUpdateObject)
+  },
+
+  UpdateRollGroupRecordToAddRoll: async ({ request }) => {
+    const form = await request.formData()
+
+    const rollgroupname = form.get('rollgroupname') ?? '';
+    const rollgrouprolls = form.get('rollgrouprolls') ?? '';
+    const rollgrouprollsid = form.get('rollgrouprollsid') ?? '';
+    const rollgroupid = form.get('rollgroupid') ?? '';
+
+    //let RollRecordToUpdate = await getOneRollRecordForUpdate(RollId)
+
+    const RollRecordToUpdateObject = {
+      rollgroupname: rollgroupname,
+      rolls: rollgrouprolls,
+    }
+
+    RollRecordToUpdateObject.rolls.push(rollgrouprollsid)
+
+    await pb.collection('roll').update(rollgroupid, RollRecordToUpdateObject)
   },
 
   UpdateRollRecordWithNewName: async ({ request }) => {
@@ -489,6 +574,23 @@ export const actions = {
       rolldies: RollRecordToUpdate.rolldies,
       rollmodifiers: RollRecordToUpdate.rollmodifiers,
       rollname: rollname
+    }
+
+    await pb.collection('roll').update(RollId, RollRecordToUpdateObject)
+  },
+
+  UpdateRollGroupRecordWithNewName: async ({ request }) => {
+    const form = await request.formData()
+
+    const rollgroupname = form.get('rollgroupname') ?? '';
+    const rollgrouprolls = form.get('rollgrouprolls') ?? '';
+    const RollId = form.get('rollid') ?? '';
+
+    let RollRecordToUpdate = await getOneRollRecordForUpdate(RollId)
+
+    const RollRecordToUpdateObject = {
+      rollgroupname: rollgroupname,
+      rolls: RollRecordToUpdate.rollmodifiers,
     }
 
     await pb.collection('roll').update(RollId, RollRecordToUpdateObject)
@@ -529,8 +631,16 @@ export const actions = {
 
   DeleteRollRecord: async ({ request }) => {
     const form = await request.formData()
-    const id = form.get('dieid') ?? '';
+    const id = form.get('rollid') ?? '';
 
     await pb.collection('roll').delete(id)
-  }
+  },
+
+  DeleteRollGroupRecord: async ({ request }) => {
+    const form = await request.formData()
+
+    const id = form.get('RollGroupid') ?? '';
+
+    await pb.collection('rollgroup').delete(id)
+  },
 }

@@ -15,7 +15,7 @@
     <DiceModifierListAndEdit diceRecord = {data.records.AllDiceRecords} modifierRecord = {data.records.AllModifierRecords}/>
     <RollList record = {data.records.AllRollRecords} diceRecord = {data.records.AllDiceRecords} modifierRecord = {data.records.AllModifierRecords}/>
     {#each data.records.AllRollGroupRecords as record}
-      <RollGroup recordroll = {record} diceRecord = {data.records.AllDiceRecords} modifierRecord = {data.records.AllDiceRecords}/>
+      <RollGroup rollGroupRecord = {record} rollRecord = {data.records.AllRollRecords} diceRecord = {data.records.AllDiceRecords} modifierRecord = {data.records.AllDiceRecords}/>
     {/each}
     <NewRollGroup />
   </div>

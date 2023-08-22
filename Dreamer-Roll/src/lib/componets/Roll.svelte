@@ -22,16 +22,10 @@
     return record.rolldies !== null;
   }
 
-  console.log("Record Rolldies")
-  console.log(record.rolldies)
-
   function IfModifierInRoll()
   {
     return record.rollmodifiers !== null;
   }
-
-  console.log("Record Rollmodifiers")
-  console.log(record.rollmodifiers)
 
   function IsRollVisible()
   {

@@ -17,7 +17,7 @@
   export let allRollRecords
   export let recordGroupId
 </script>
-<div class="mt-3 my-1 mx-0.5 divide-y divide-gray-500/25space-y-2 py-2 sm:py-6 lg:py-6">
+<div class="mx-0.5 divide-y divide-gray-500/25space-y-2">
   <div class="w-90% rounded-lg border-2 border-gray-300 p-1 text-center hover:border-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
     <div>
       <button type="button" on:click={expandRollListComboBoxButton} class="inline-flex w-full justify-center gap-x-1.5 rounded-md px-3 py-2 text-sm font-semibold text-white shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-500" id="menu-button" aria-expanded="true" aria-haspopup="true">

@@ -2,6 +2,7 @@
   import RollInGroup from "$lib/componets/RollInGroup.svelte";
   import NewRoll from "$lib/componets/NewRoll.svelte";
   import NewRollComboBox from "$lib/componets/NewRollComboBox.svelte";
+  import {enhance} from '$app/forms'
   export let rollGroupRecord
   export let rollRecord
   export let diceRecord
@@ -30,17 +31,38 @@
     </button>
   </div>
   {#if BoolIsRollListVisible}
+  <div>
+    <form method="POST" action="?/UpdateRollGroupRecordWithNewName" use:enhance>
+      <div class="flex">
+        <div>
+          <input type="hidden" required name="rollgroupid" id="rollgroupid" value="{rollGroupRecord.id}">
+          <div class="block text-sm font-semibold leading-6 text-white">Roll Name - {rollGroupRecord.rollgroupname}</div>
+          <input type="text" required name="rollgroupname" id="rollgroupname" class="m-2 mx-5 block rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" placeholder="{rollGroupRecord.rollgroupname}" value="{rollGroupRecord.rollgroupname}">
+        </div>
+        <div>
+          <button type="submit" class="m-2 rounded-md bg-indigo-600 py-2.5 px-3.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
+            <span class="text-sm font-semibold leading-6 text-white">Save Roll Group</span>
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+
     <div class="flex flex-wrap">
     {#if BoolIfRollsInRollGroup}
       {#each rollGroupRecord.rolls as record, i}
         <RollInGroup record = {record} recordsGroupId = {rollGroupRecord.id} diceRecord = {diceRecord} modifierRecord = {modifierRecord}/>
       {/each}
-      <NewRoll />
-      <NewRollComboBox allRollRecords = {rollRecord} recordGroupId = {rollGroupRecord.id} />
+      <div class="flex flex-col">
+        <NewRoll />
+        <NewRollComboBox allRollRecords = {rollRecord} recordGroupId = {rollGroupRecord.id} />
+      </div>
     {/if}
     {#if !BoolIfRollsInRollGroup}
-      <NewRoll />
-      <NewRollComboBox />
+      <div class="flex flex-col">
+        <NewRoll />
+        <NewRollComboBox allRollRecords = {rollRecord} recordGroupId = {rollGroupRecord.id} />
+      </div>
     {/if}
     </div>
   {/if}

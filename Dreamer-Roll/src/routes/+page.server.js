@@ -250,17 +250,16 @@ export const actions = {
     const form = await request.formData()
 
     const rollgroupname = form.get('rollgroupname') ?? '';
-    const rollgrouprolls = form.get('rollgrouprolls') ?? '';
-    const RollId = form.get('rollid') ?? '';
+    const rollgroupid = form.get('rollgroupid') ?? '';
 
-    let RollRecordToUpdate = await getOneRollRecordForUpdate(RollId)
+    let RollRecordToUpdate = await getOneRollGroupRecordToUpdate(rollgroupid)
 
     const RollRecordToUpdateObject = {
       rollgroupname: rollgroupname,
-      rolls: RollRecordToUpdate.rollmodifiers,
+      rolls: RollRecordToUpdate.rolls,
     }
 
-    await pb.collection('rollgroup').update(RollId, RollRecordToUpdateObject)
+    await pb.collection('rollgroup').update(rollgroupid, RollRecordToUpdateObject)
   },
 
   UpdateRollRecordWithNewRollResult: async ({ request }) => {

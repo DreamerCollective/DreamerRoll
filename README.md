@@ -23,7 +23,7 @@ cd Dreamer-Roll-backend
 
 that should start a local host with the port of 127.0.0.1:5173
 
-REMEMBER: the env. file should be like this if you don't have one create it.
+REMEMBER: the env. file should be like thi, if you don't have one create it.
 ```
 
 PRIVATE_POCKETBASE_URL='[PockbaseURL]'

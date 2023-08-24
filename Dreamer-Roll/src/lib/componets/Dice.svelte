@@ -1,7 +1,7 @@
 <script>
   import {enhance} from '$app/forms'
   export let record;
-  export let recordid;
+  export let recordindex;
   export let rollrecordid
 
   let BoolIsRollDiceVisible = true;
@@ -34,7 +34,7 @@
   </form>
   <form method="POST" action="?/UpdateRollRecordToRemoveDice" use:enhance>
     <input type="hidden" required name="rollid" id="rollid" value="{rollrecordid}">
-    <input type="hidden" required name="dieid" id="dieid" value="{recordid}">
+    <input type="hidden" required name="recordindex" id="recordindex" value="{recordindex}">
     <button type="submit" class="m-3.5 rounded-md bg-red-600 py-1 px-4 text-sm font-semibold text-white shadow-sm hover:bg-red-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-600">
       <span class="text-sm font-semibold leading-6 text-white">Remove Die</span>
     </button>

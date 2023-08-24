@@ -133,7 +133,7 @@ export const actions = {
   UpdateRollRecordToRemoveDice: async ({ request }) => {
     const form = await request.formData()
 
-    const dieid = form.get('dieid') ?? '';
+    const recordindex = form.get('recordindex') ?? '';
     const RollId = form.get('rollid') ?? '';
 
     let RollRecordToUpdate = await getOneRollRecordForUpdate(RollId)
@@ -145,7 +145,7 @@ export const actions = {
       rollname: RollRecordToUpdate.rollname
     }
 
-    RollRecordToUpdateObject.rolldies.splice(dieid.index,1)
+    RollRecordToUpdateObject.rolldies.splice(recordindex,1)
 
     await pb.collection('roll').update(RollId, RollRecordToUpdateObject)
   },
@@ -193,7 +193,7 @@ export const actions = {
   UpdateRollGroupRecordToRemoveRoll: async ({ request }) => {
     const form = await request.formData()
 
-    const rollid = form.get('rollid') ?? '';
+    const recordindex = form.get('recordindex') ?? '';
     const rollgroupid = form.get('rollgroupid') ?? '';
 
     let RollGroupRecordToUpdate = await getOneRollGroupRecordToUpdate(rollgroupid)
@@ -205,7 +205,7 @@ export const actions = {
       rolls: RollGroupRecordToUpdate.rolls,
     }
 
-    RollRecordToUpdateObject.rolls.splice(rollid, 1)
+    RollRecordToUpdateObject.rolls.splice(recordindex, 1)
 
     await pb.collection('rollgroup').update(rollgroupid, RollRecordToUpdateObject)
   },

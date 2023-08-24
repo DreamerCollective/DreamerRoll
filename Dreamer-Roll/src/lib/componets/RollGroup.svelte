@@ -51,7 +51,7 @@
     <div class="flex flex-wrap">
     {#if BoolIfRollsInRollGroup}
       {#each rollGroupRecord.rolls as record, i}
-        <RollInGroup record = {record} recordsGroupId = {rollGroupRecord.id} diceRecord = {diceRecord} modifierRecord = {modifierRecord}/>
+        <RollInGroup record = {record} recordsGroupId = {rollGroupRecord.id} recordindex={i} diceRecord = {diceRecord} modifierRecord = {modifierRecord}/>
       {/each}
       <div class="flex flex-col">
         <NewRoll />

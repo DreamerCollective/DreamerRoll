@@ -86,7 +86,7 @@
         <div class="text-sm font-semibold leading-6 text-white">Dice</div>
         {#if BoolIfDiceInRoll}
           {#each record.rolldies as recordDice, i}
-            <Dice record="{recordDice}" rollrecordid="{record.id}" recordid="{i}"/>
+            <Dice record="{recordDice}" rollrecordid="{record.id}" recordindex="{i}"/>
           {/each}
           <DiceComboBox allDiceRecords="{diceRecord}" recordId="{record.id}"/>
           <AddNewDice />
@@ -111,7 +111,7 @@
         <div class="text-sm font-semibold leading-6 text-white">Modifiers</div>
         {#if BollIfModifierInRoll}
           {#each record.rollmodifiers as recordModifier, i}
-            <Modifier record="{recordModifier}" rollrecordid="{record.id}" recordid="{i}"/>
+            <Modifier record="{recordModifier}" rollrecordid="{record.id}" recordindex="{i}"/>
           {/each}
           <ModifierComboBox allModifierRecords="{modifierRecord}" recordId="{record.id}" />
           <AddNewModifier />

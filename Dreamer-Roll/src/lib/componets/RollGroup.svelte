@@ -65,5 +65,11 @@
       </div>
     {/if}
     </div>
+    <form method="POST" action="?/DeleteRollGroupRecord" use:enhance>
+      <input type="hidden" required name="rollgrouprecordid" id="rollgrouprecordid" value="{rollGroupRecord.id}">
+      <button type="submit" class="flex m-2 rounded-md bg-red-600 py-2.5 px-3.5 text-sm font-semibold text-white shadow-sm hover:bg-red-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-600">
+        <span class="text-sm font-semibold leading-6 text-white">Remove Roll Group</span>
+      </button>
+    </form>
   {/if}
 </div>

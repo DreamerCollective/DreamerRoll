@@ -305,7 +305,7 @@ export const actions = {
   DeleteRollGroupRecord: async ({ request }) => {
     const form = await request.formData()
 
-    const id = form.get('RollGroupid') ?? '';
+    const id = form.get('rollgrouprecordid') ?? '';
 
     await pb.collection('rollgroup').delete(id)
   },

@@ -1,11 +1,12 @@
 <script>
+  import Dashboard from "$lib/componets/Dashboard.svelte";
   import {applyAction, enhance} from "$app/forms"
 
   //export let data;
 
 </script>
 <div>
-  <header class="bg-gray-900">
+  <!--<header class="bg-gray-900">
     <nav class="mx-auto flex items-center justify-between p-6 lg:px-8" aria-label="Global">
       <div class="flex lg:flex-1">
         <a href="/" class="-m-1.5 p-1.5">
@@ -22,18 +23,21 @@
         </button>
       </div>
       <div class="hidden lg:flex lg:flex-1 lg:justify-end">
-        <!--{#if data}-->
+        {#if data}
           <a href="/" class="text-sm mx-1 font-semibold leading-6 text-white">Logout</a>
-        <!--<li><a href="/"> Signed in as {data.email}</a></li> -->
-   <!-- {:else }-->
+        <li><a href="/"> Signed in as {data.email}</a></li>
+   <{:else }
       <div class="flex">
         <a href="/Signup" class="text-sm mx-1 font-semibold leading-6 text-white">Register</a>
         <a href="/Login" class="text-sm mx-1 font-semibold leading-6 text-white">Log in <span aria-hidden="true">&rarr;</span></a>
       </div>
-    <!--{/if} -->
+    {/if}
       </div>
     </nav>
-  </header>
-  <slot/>
+  </header> -->
+  <Dashboard />
+  <main class="pl-36">
+    <slot />
+  </main>
 </div>
 

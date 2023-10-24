@@ -1,6 +1,6 @@
 <script>
-  import Roll from "$lib/componets/Roll.svelte";
-  import NewRoll from "$lib/componets/NewRoll.svelte";
+  import Roll from "$lib/componets/Rolls/Roll.svelte";
+  import NewRoll from "$lib/componets/Rolls/NewRoll.svelte";
   export let record
   export let diceRecord
   export let modifierRecord

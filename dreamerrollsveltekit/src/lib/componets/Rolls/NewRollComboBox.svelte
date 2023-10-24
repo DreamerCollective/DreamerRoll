@@ -1,7 +1,7 @@
 <script>
-  import DiceComboxOption from "$lib/componets/DiceComboOption.svelte";
-  import NewRollOption from "$lib/componets/NewRollComboOption.svelte";
-  import NewRollComboOption from "$lib/componets/NewRollComboOption.svelte";
+  import DiceComboxOption from "$lib/componets/Rolls/DiceComboOption.svelte";
+  import NewRollOption from "$lib/componets/Rolls/NewRollComboOption.svelte";
+  import NewRollComboOption from "$lib/componets/Rolls/NewRollComboOption.svelte";
 
   let RollListExpandComboBoxButton = true
   function expandRollListComboBoxButton()

@@ -1,8 +1,8 @@
 <script>
-  import AddNewModifier from "$lib/componets/AddNewModifier.svelte";
-  import AddNewDice from "$lib/componets/AddNewDice.svelte";
-  import ModifierList from "$lib/componets/ModifierList.svelte";
-  import DiceList from "$lib/componets/DiceList.svelte";
+  import AddNewModifier from "$lib/componets/Rolls/AddNewModifier.svelte";
+  import AddNewDice from "$lib/componets/Rolls/AddNewDice.svelte";
+  import ModifierList from "$lib/componets/Rolls/ModifierList.svelte";
+  import DiceList from "$lib/componets/Rolls/DiceList.svelte";
 
   export let diceRecord
   export let modifierRecord

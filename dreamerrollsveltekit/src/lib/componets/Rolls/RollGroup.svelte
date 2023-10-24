@@ -1,7 +1,7 @@
 <script>
-  import RollInGroup from "$lib/componets/RollInGroup.svelte";
-  import NewRoll from "$lib/componets/NewRoll.svelte";
-  import NewRollComboBox from "$lib/componets/NewRollComboBox.svelte";
+  import RollInGroup from "$lib/componets/Rolls/RollInGroup.svelte";
+  import NewRoll from "$lib/componets/Rolls/NewRoll.svelte";
+  import NewRollComboBox from "$lib/componets/Rolls/NewRollComboBox.svelte";
   import {enhance} from '$app/forms'
   export let rollGroupRecord
   export let rollRecord

@@ -1,11 +1,11 @@
 <script>
   import "../app.postcss";
-  import Roll from "$lib/componets/Roll.svelte";
-  import NewRoll from "$lib/componets/NewRoll.svelte";
-  import DiceModifierListAndEdit from "$lib/componets/DiceModifierListAndEdit.svelte";
-  import RollList from "$lib/componets/RollList.svelte";
-  import RollGroup from "$lib/componets/RollGroup.svelte";
-  import NewRollGroup from "$lib/componets/NewRollGroup.svelte";
+  import Roll from "$lib/componets/Rolls/Roll.svelte";
+  import NewRoll from "$lib/componets/Rolls/NewRoll.svelte";
+  import DiceModifierListAndEdit from "$lib/componets/Rolls/DiceModifierListAndEdit.svelte";
+  import RollList from "$lib/componets/Rolls/RollList.svelte";
+  import RollGroup from "$lib/componets/Rolls/RollGroup.svelte";
+  import NewRollGroup from "$lib/componets/Rolls/NewRollGroup.svelte";
   export let data;
 
 </script>

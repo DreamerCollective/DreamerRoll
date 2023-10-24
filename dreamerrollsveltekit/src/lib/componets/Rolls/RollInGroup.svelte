@@ -1,13 +1,15 @@
 <script>
   import Modifier from "./Modifier.svelte";
   import Dice from "./Dice.svelte";
-  import DiceComboBox from "$lib/componets/DiceComboBox.svelte";
-  import ModifierComboBox from "$lib/componets/ModifierComboBox.svelte";
-  import AddNewModifier from "$lib/componets/AddNewModifier.svelte";
-  import AddNewDice from "$lib/componets/AddNewDice.svelte";
+  import DiceComboBox from "$lib/componets/Rolls/DiceComboBox.svelte";
+  import ModifierComboBox from "$lib/componets/Rolls/ModifierComboBox.svelte";
+  import AddNewModifier from "$lib/componets/Rolls/AddNewModifier.svelte";
+  import AddNewDice from "$lib/componets/Rolls/AddNewDice.svelte";
 
   import {enhance} from '$app/forms'
   export let record
+  export let recordindex
+  export let recordsGroupId
   export let diceRecord
   export let modifierRecord
 
@@ -86,7 +88,7 @@
         <div class="text-sm font-semibold leading-6 text-white">Dice</div>
         {#if BoolIfDiceInRoll}
           {#each record.rolldies as recordDice, i}
-            <Dice record="{recordDice}" rollrecordid="{record.id}" recordindex="{i}"/>
+            <Dice record="{recordDice}" rollrecordid="{record.id}" recordid="{i}"/>
           {/each}
           <DiceComboBox allDiceRecords="{diceRecord}" recordId="{record.id}"/>
           <AddNewDice />
@@ -111,7 +113,7 @@
         <div class="text-sm font-semibold leading-6 text-white">Modifiers</div>
         {#if BollIfModifierInRoll}
           {#each record.rollmodifiers as recordModifier, i}
-            <Modifier record="{recordModifier}" rollrecordid="{record.id}" recordindex="{i}"/>
+            <Modifier record="{recordModifier}" rollrecordid="{record.id}" recordid="{i}"/>
           {/each}
           <ModifierComboBox allModifierRecords="{modifierRecord}" recordId="{record.id}" />
           <AddNewModifier />
@@ -134,8 +136,9 @@
         </button>
       </form>
       <div class="text-sm py-4 px-2.5 font-semibold leading-6 text-white">Result = {record.result}</div>
-      <form method="POST" action="?/DeleteRollRecord" use:enhance>
-        <input type="hidden" required name="rollid" id="rollid" value="{record.id}">
+      <form method="POST" action="?/UpdateRollGroupRecordToRemoveRoll" use:enhance>
+        <input type="hidden" required name="recordindex" id="recordindex" value="{recordindex}">
+        <input type="hidden" required name="rollgroupid" id="rollgroupid" value="{recordsGroupId}">
         <button type="submit" class="flex m-2 rounded-md bg-red-600 py-2.5 px-3.5 text-sm font-semibold text-white shadow-sm hover:bg-red-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-600">
           <span class="text-sm font-semibold leading-6 text-white">Remove Roll</span>
         </button>

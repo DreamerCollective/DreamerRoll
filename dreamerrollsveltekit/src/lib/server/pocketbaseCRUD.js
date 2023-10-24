@@ -66,7 +66,7 @@ export async function getAllRollRecord() {
 export async function getAllRollGroupRecord() {
   const RollGroupRecord = await pb.collection('rollgroup').getFullList({
     sort: 'created',
-    expand: 'rolls,rolls.rolldies,rolls.rollmodifiers',
+    expand: 'rolls, rolls.rolldies, rolls.rollmodifiers',
   });
   console.log("New RollGroupRecord")
   console.log(RollGroupRecord)
@@ -99,7 +99,6 @@ export async function getAllRollGroupRecord() {
             }
             else if (record.rollmodifiers === null && record.rolldies === null)
             {
-              console.log("error")
               return {
                 id: record.id, rollname: record.rollname, result: record.result,
                 rolldies: [],

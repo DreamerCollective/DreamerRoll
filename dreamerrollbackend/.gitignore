@@ -1,6 +1,4 @@
 # PocketBase data file
 pb_data/
-pb_migrations/
 
 .db
-.js
